@@ -26,8 +26,16 @@
     align-items: center;
 }
 
+.justify-between {
+    justify-content: space-between;
+}
+
 .bg-green {
     background-color: var(--green);
+}
+
+.connexion {
+    height: 250px;
 }
 
 input {
@@ -61,13 +69,18 @@ h1 {
 }
 
 .header__img {
-    width: 40%;
+    display: flex;
+    justify-content: center;
     margin: 30px auto;
+}
+
+.header__img img {
+    width: 30%;
 }
 
 .footer__img {
     position: absolute;
     bottom: 0;
     margin: auto;
-    max-width: 100%;
+    width: 100%;
 }
