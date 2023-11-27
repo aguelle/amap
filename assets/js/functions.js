@@ -15,5 +15,5 @@ async function fetchApi(method, data) {
 }
 
 function getToken() {
-    return document.getElementById('tokenField').value;
+    return document.getElementById('token').value;
 }
