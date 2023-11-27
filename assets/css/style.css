@@ -1,0 +1,73 @@
+:root {
+    /* FONTS */
+    --primary-font: 'sansitaone';
+
+    /* COLORS */
+    --cream: #CFC0A6;
+    --grey: #878A8D;
+    --green: #4E9760;
+}
+
+@font-face {
+    font-family: 'sansitaone';
+    src: url('../fonts/SansitaOne.ttf');
+}
+
+/* UTILS */
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.bg-green {
+    background-color: var(--green);
+}
+
+input {
+    font-family: var(--primary-font);
+    font-size: 1.5rem;
+    width: 50%;
+    border: solid black 2px;
+    border-radius: 30px;
+    background-color: var(--grey);
+    color: white;
+    padding: 10px;
+    margin: 10px;
+}
+
+input::placeholder {
+    text-align: center;
+    color: white;
+}
+
+body {
+    background-color: var(--cream);
+}
+
+h1 {
+    font-family: var(--primary-font);
+    font-size: 3rem;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    padding-bottom: 30px;
+}
+
+.header__img {
+    width: 40%;
+    margin: 30px auto;
+}
+
+.footer__img {
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    max-width: 100%;
+}
