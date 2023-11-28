@@ -36,6 +36,7 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
     fetchApi('POST', data)
         .then(data => {
             console.log(data);
+            data
             if (data['result'] === true) {
                 console.log('On connecte la base de données.')
             }
