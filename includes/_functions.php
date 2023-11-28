@@ -21,7 +21,7 @@ function getToken()
  */
 function checkCSRFAsync(array $data): void
 {
-    if (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], 'http://localhost/amap/')) {
+    if (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], 'localhost/amap/')) {
         $error = 'error_referer';
     } else if (
         !isset($_SESSION['token']) || !isset($data['token'])
