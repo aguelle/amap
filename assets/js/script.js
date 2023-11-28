@@ -1,4 +1,4 @@
-document.getElementById('create__btn').addEventListener('click', function (event) {
+document.getElementById('create__link').addEventListener('click', function (event) {
     event.preventDefault();
     document.getElementById('inscription').classList.remove('hidden');
     document.getElementById('connexion').classList.add('hidden');

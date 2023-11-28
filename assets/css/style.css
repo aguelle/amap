@@ -1,17 +1,17 @@
 :root {
     /* FONTS */
-    --primary-font: 'roboto-regular';
+    --primary-font: 'opensans-regular';
 
     /* COLORS */
     --cream: #CFC0A6;
     --grey: #878A8D;
     --green: #4E9760;
-    --orange: #AE6233;
+    --pink: #C97064;
 }
 
 @font-face {
-    font-family: 'roboto-regular';
-    src: url('../fonts/Roboto-Regular.ttf');
+    font-family: 'opensans-regular';
+    src: url('../fonts/OpenSans-Regular.ttf');
 }
 
 /* UTILS */
@@ -35,8 +35,8 @@
     background-color: var(--green);
 }
 
-.bg-orange {
-    background-color: var(--orange);
+.bg-pink {
+    background-color: var(--pink);
 }
 
 .btn {
@@ -58,21 +58,26 @@
 
 input {
     font-family: var(--primary-font);
-    font-size: 1.5rem;
-    width: 50%;
-    background-color: var(--grey);
-    color: white;
+    font-size: 1.2rem;
+    width: 80%;
     padding: 10px;
     margin: 10px;
+    border-radius: 10px;
+    color: white;
 }
 
 input::placeholder {
     text-align: center;
-    color: white;
+    color: black;
+}
+
+.create__link {
+    color: var(--pink);
 }
 
 body {
     background-color: var(--cream);
+    font-family: var(--primary-font);
 }
 
 h1 {
@@ -87,11 +92,10 @@ h1 {
 .header__img {
     display: flex;
     justify-content: center;
-    margin: 30px auto;
 }
 
-.header__img img {
-    width: 30%;
+.img {
+    width: 80%;
 }
 
 .footer__img {
