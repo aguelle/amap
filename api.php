@@ -24,7 +24,7 @@ checkXSS($data);
 if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5) {
 
     try {
-        $query = $dbCo->prepare('SELECT email FROM users;');
+        $query = $dbCo->prepare('SELECT email FROM person;');
         $query->execute();
         $result = $query->fetchAll();
         foreach($result as $i) {
@@ -37,10 +37,10 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
             };
         };
         $dbCo->beginTransaction();
-        $query = $dbCo->prepare("INSERT INTO users(email, hashed_pwd) VALUES (:email, :hashed_pwd);");
+        $query = $dbCo->prepare("INSERT INTO person(email, password) VALUES (:email, :password);");
         $isQueryOk = $query->execute([
             'email' => $data['email'],
-            'hashed_pwd' => password_hash($data['pwd'], PASSWORD_DEFAULT)
+            'password' => password_hash($data['pwd'], PASSWORD_DEFAULT)
         ]);
         if ($isQueryOk) {
             $dbCo->commit();
@@ -65,14 +65,14 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
 else if (isset($data['action']) && $data['action'] === 'connexion' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5) {
     try {
         $dbCo->beginTransaction();
-        $query = $dbCo->prepare('SELECT hashed_pwd FROM users WHERE email = :email;');
+        $query = $dbCo->prepare('SELECT password FROM person WHERE email = :email;');
         $isQueryOk = $query->execute([
             'email' => $data['email']
         ]);
         if ($isQueryOk) {
             $result = $query->fetch();
             $dbCo->commit();
-            if (!password_verify($data['pwd'], $result['hashed_pwd'])) {
+            if (!password_verify($data['pwd'], $result['password'])) {
                 echo json_encode([
                     'result' => false,
                     'error' => 'Ce n\'est pas le bon mot de passe.'
