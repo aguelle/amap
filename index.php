@@ -26,17 +26,17 @@ getToken();
         <h1></h1>
         <section>
             <form id="inscription" class="form flex column align-center justify-between hidden">
-                <input id="insc__lastname" type="text" name="lastname" placeholder="Nom">
-                <input id="insc__firstname" type="text" name="firstname" placeholder="Prénom">
-                <input id="insc__email" type="email" name="email" placeholder="Email">
-                <input id="insc__pwd" type="password" name="password" placeholder="Mot de passe">
-                <input id="insc__btn" class="bg-pink" type="submit" value="Créer le compte">
+                <input id="insc__lastname" type="text" name="lastname" placeholder="Nom" required>
+                <input id="insc__firstname" type="text" name="firstname" placeholder="Prénom" required>
+                <input id="insc__email" type="email" name="email" placeholder="Email" required>
+                <input id="insc__pwd" type="password" name="password" placeholder="Mot de passe" required>
+                <input id="insc__btn" class="bg-pink insc__btn" type="submit" value="Créer le compte">
             </form>
             <form id="connexion" class="form flex column align-center justify-between">
-                <input id="conn__email" type="email" name="email" placeholder="Email">
-                <input id="conn__pwd" type="password" name="password" placeholder="Mot de passe">
+                <input id="conn__email" type="email" name="email" placeholder="Email" required>
+                <input id="conn__pwd" type="password" name="password" placeholder="Mot de passe" required>
                 <input id="token" type="hidden" name="token" value="<?=$_SESSION['token']?>">
-                <input id="conn__btn" class="bg-pink" type="submit" value="Connexion">
+                <input id="conn__btn" class="bg-pink conn__btn" type="submit" value="Se connecter">
                 <p>Vous n'avez pas de compte ? <a href="#" id="create__link" class="create__link">Inscrivez-vous</a></p>
             </form>
             

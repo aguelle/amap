@@ -21,7 +21,7 @@ checkCSRFAsync($data);
 checkXSS($data);
 
 // Creation of an account
-if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5) {
+if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5 && isset($data['lastname']) && strlen($data['lastname']) > 0 && isset($data['firstname']) && strlen($data['firstname']) > 0) {
 
     try {
         $query = $dbCo->prepare('SELECT email FROM person;');
@@ -31,14 +31,16 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
             if ($i['email'] === $data['email']) {
                 echo json_encode([
                     'result' => false,
-                    'error' => 'Cette adresse existe déjà.'
+                    'error' => 'Cette adresse email existe déjà.'
                 ]);
                 exit;
             };
         };
         $dbCo->beginTransaction();
-        $query = $dbCo->prepare("INSERT INTO person(email, password) VALUES (:email, :password);");
+        $query = $dbCo->prepare("INSERT INTO person(lastname, firstname, email, password) VALUES (:lastname, :firstname, :email, :password);");
         $isQueryOk = $query->execute([
+            'lastname' => $data['lastname'],
+            'firstname' => $data['firstname'],
             'email' => $data['email'],
             'password' => password_hash($data['pwd'], PASSWORD_DEFAULT)
         ]);
