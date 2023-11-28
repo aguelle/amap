@@ -22,9 +22,10 @@ checkXSS($data);
 
 // Connexion with an existing account
 if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5) {
+
     try {
         $dbCo->beginTransaction();
-        $query = $dbCo->prepare("INSERT INTO users SET email = :email, hashed_pwd = :hashed_pwd;");
+        $query = $dbCo->prepare("INSERT INTO person SET email = :email, password = :hashed_pwd;");
         $isQueryOk = $query->execute([
             'email' => $data['email'],
             'hashed_pwd' => password_hash($data['pwd'], PASSWORD_DEFAULT)

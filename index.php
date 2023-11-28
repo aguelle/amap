@@ -35,7 +35,7 @@ getToken();
                 <input id="conn__pwd" type="password" name="password" placeholder="Mot de passe">
                 <input id="token" type="hidden" name="token" value="<?=$_SESSION['token']?>">
                 <input id="conn__btn" class="bg-green" type="submit" value="Connexion">
-                <button id="create__btn" class="btn bg-orange">Créer un compte</button>
+                <button id="create__btn" class="btn bg-orange" cursor: pointer >Créer un compte</button>
             </form>
             
             <button></button>
@@ -43,7 +43,7 @@ getToken();
     </main>
 
     <footer>
-        <img class="img footer__img" src="assets/img/vegetables2.png" alt="panier de légumes">
+        <!-- <img class="img footer__img" src="assets/img/vegetables2.png" alt="panier de légumes"> -->
     </footer>
 
     <script src="./assets/js/functions.js"></script>
