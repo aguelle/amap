@@ -22,6 +22,7 @@ checkXSS($data);
 
 // Creation of an account
 if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5) {
+
     try {
         $query = $dbCo->prepare('SELECT email FROM users;');
         $query->execute();
