@@ -67,20 +67,21 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
 else if (isset($data['action']) && $data['action'] === 'connexion' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5) {
     try {
         $dbCo->beginTransaction();
-        $query = $dbCo->prepare('SELECT password FROM person WHERE email = :email;');
+        $query = $dbCo->prepare('SELECT id_person, password FROM person WHERE email = :email;');
         $isQueryOk = $query->execute([
             'email' => $data['email']
         ]);
         if ($isQueryOk) {
-            $result = $query->fetch();
+            $result = $query->fetchAll();
             $dbCo->commit();
-            if (!password_verify($data['pwd'], $result['password'])) {
+            if (!password_verify($data['pwd'], $result[0]['password'])) {
                 echo json_encode([
                     'result' => false,
                     'error' => 'Ce n\'est pas le bon mot de passe.'
                 ]);
                 exit;
             } else {
+                $_SESSION['id_person'] = $result[0]['id_person'];
                 echo json_encode([
                     'result' => true,
                     'notif' => 'Connexion ok.'
@@ -110,3 +111,5 @@ else {
     ]);
     exit;
 }
+
+// $result['id_person'];
