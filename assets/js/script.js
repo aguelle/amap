@@ -18,6 +18,7 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
     fetchApi('POST', data)
         .then(data => {
             console.log(data);
+            document.location.replace('member.php');
         })
         .catch(error => {
             console.error("Error :", error);
@@ -38,6 +39,7 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
             if (data['result'] === true) {
                 console.log('On connecte la base de données.')
             }
+            document.location.replace('member.php');
         })
         .catch(error => {
             console.error("Error :", error);
