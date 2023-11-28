@@ -9,6 +9,8 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
     const data = {
         action: 'inscription',
         token: getToken(),
+        lastname: document.getElementById('insc__lastname').value,
+        firstname: document.getElementById('insc__firstname').value,
         email: document.getElementById('insc__email').value,
         pwd: document.getElementById('insc__pwd').value
     };
