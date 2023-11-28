@@ -26,7 +26,34 @@ getToken();
         <section>
             <h2 class="bg-green member_title">A récupérer</h2>
         </section>
+        <ul>
+            <?php
+            $query = $dbCo->prepare("SELECT distribution_start, distribution_end, address
+                FROM distribution
+                    JOIN quarter USING (id_quarter)
+                    JOIN commitment USING (id_quarter)
+                    JOIN subscribe USING (id_commitment)
+                WHERE id_amap_user = 1 AND id_quarter = 1
+                GROUP BY id_distribution;");
 
+            $query->execute();
+            $result = $query->fetchall();
+
+            foreach ($result as $distribution) {
+                $datetime = date_create($distribution['distribution_start']);
+                $date = date_format($datetime, 'd/m/Y');
+                $time1 = date_format($datetime, 'H:i');
+                $time2 = date_format(date_create($distribution['distribution_end']), 'H:i');
+            ?>
+                <li class="product">
+                    <p>Au <?= $distribution['address'] ?></p>
+                    <p>Le <?= $date ?> de <?= $time1 ?> à <?= $time2 ?></p>
+                </li>
+
+            <?php
+            }
+            ?>
+        </ul>
         <section>
             <h2 class="bg-pink member_title">Abonnements</h2>
             <ul>
