@@ -139,96 +139,15 @@ h1 {
 }
 
 /********** MANAGER PAGE **********/
-.MANAGER-MOBILE-PAGE .profile-nav {
-    align-items: center;
-    background-color: #ca7368;
-    border-radius: 40px 40px 0px 0px;
-    display: flex;
-    gap: 32px;
-    height: 80px;
-    justify-content: center;
-    left: 0;
-    position: fixed;
-    top: 987px;
-    width: 393px;
-}
-
-.MANAGER-MOBILE-PAGE .member {
-    height: 32px;
-    position: relative;
-    width: 32px;
-}
-
-.MANAGER-MOBILE-PAGE .text-wrapper-4 {
-    color: #ffffff99;
-    font-family: "Open Sans-Bold", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    height: 33px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: relative;
-    text-align: center;
-    width: 113px;
-}
-
-.MANAGER-MOBILE-PAGE .manager {
-    height: 32px;
-    position: relative;
-    width: 40px;
-}
-
-.MANAGER-MOBILE-PAGE .text-wrapper-5 {
-    color: #ffffff;
-    font-family: "Open Sans-Bold", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    height: 33px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: relative;
-    text-align: center;
-    width: 151px;
-}
-
-.MANAGER-MOBILE-PAGE .link-to-add {
-    align-items: center;
-    background-color: #c4ae82;
-    border-radius: 8px;
-    display: flex;
-    height: 40px;
-    justify-content: space-between;
-    left: 25px;
-    padding: 5px 20px;
-    position: fixed;
-    top: 930px;
-    width: 343px;
-}
-
-.MANAGER-MOBILE-PAGE .text-wrapper-6 {
-    color: #ffffff;
-    font-family: "Open Sans-Bold", Helvetica;
-    font-size: 20px;
-    font-weight: 700;
-    height: 27px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: relative;
-    text-align: center;
-    width: 225px;
-}
-
-.MANAGER-MOBILE-PAGE .img {
-    height: 20px;
-    position: relative;
-    width: 20px;
-}
-
-
 body {
     display: grid;
     grid-template-rows: 26vh 74vh;
 }
+
+button, a {
+    cursor: pointer;
+}
+
 
 
 header {
@@ -256,6 +175,7 @@ header {
 }
 
 
+
 main {
     gap: 34px;
     background-color: #ffffff59;
@@ -263,6 +183,7 @@ main {
     padding: 30px 25px;
     margin-top: 38px;
 }
+
 
 .display {
     display: flex;
@@ -306,6 +227,7 @@ main {
     filter: invert(100%) sepia(5%) saturate(22%) hue-rotate(131deg) brightness(103%) contrast(108%);
 }
 
+
 .list-cntnr {
     padding-left: 24px;
     width: 100%;
@@ -342,6 +264,30 @@ main {
 
 .icon {
     height: 20px;
+}
+
+
+.add {
+    position: fixed;
+    bottom: 97px;
+}
+
+.add-grower {
+    align-items: center;
+    background-color: #c4ae82;
+    border-radius: 8px;
+    display: flex;
+    gap: 40px;
+    padding: 5px 20px;
+}
+
+.add-txt {
+    color: #ffffff;
+    font-family: var(--primary-font);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
 }
 
 
@@ -386,27 +332,4 @@ nav {
 
 .active>.profile-name {
     color: #ffffff;
-}
-
-.add {
-    position: fixed;
-    bottom: 97px;
-}
-
-.add-grower {
-    align-items: center;
-    background-color: #c4ae82;
-    border-radius: 8px;
-    display: flex;
-    gap: 40px;
-    padding: 5px 20px;
-}
-
-.add-txt {
-    color: #ffffff;
-    font-family: var(--primary-font);
-    font-size: 20px;
-    font-weight: 700;
-    line-height: normal;
-    text-align: center;
 }

@@ -32,24 +32,30 @@ getToken();
                 <div class="title">
                     <h3 class="title-txt">(Nom Entreprise)</h3>
                 </div>
-                <div class="add-product">
-                    <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
-                </div>
+                <button class="product-btn">
+                    <div class="add-product">
+                        <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
+                    </div>
+                </button>
             </div>
             <div class="list-cntnr">
                 <ul class="list-content">
                     <li class="product-cntnr">
                         <h4 class="product-title">(Qty ttl) (Nom Produit)</h4>
                         <div class="icons-cntnr">
-                            <img src="assets/img/pencil-solid.svg" alt="pencil solid logo" class="icon">
-                            <img src="assets/img/trash-can-solid.svg" alt="trash can solid logo" class="icon">
+                            <button class="edit-btn">
+                                <img src="assets/img/pencil-solid.svg" alt="pencil solid logo" class="icon">
+                            </button>
+                            <button class="delete-btn">
+                                <img src="assets/img/trash-can-solid.svg" alt="trash can solid logo" class="icon">
+                            </button>
                         </div>
                     </li>
                 </ul>
             </div>
         </section>
         <section class="add">
-            <button>
+            <button class="grower-btn">
                 <div class="add-grower">
                     <p class="add-txt">Ajouter un producteur</p>
                     <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
@@ -57,14 +63,18 @@ getToken();
             </button>
         </section>
         <nav>
-            <div class="profile-page">
-                <img src="assets/img/user-large-solid.svg" alt="user solid icon" class="nav-icon">
-                <p class="profile-name">Adhérent</p>
-            </div>
-            <div class="profile-page active">
-                <img src="assets/img/user-group-solid.svg" alt="user group solid icon" class="nav-icon">
-                <p class="profile-name">Responsable</p>
-            </div>
+            <a href="member.php">
+                <div class="profile-page">
+                    <img src="assets/img/user-large-solid.svg" alt="user solid icon" class="nav-icon">
+                    <p class="profile-name">Adhérent</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="profile-page active">
+                    <img src="assets/img/user-group-solid.svg" alt="user group solid icon" class="nav-icon">
+                    <p class="profile-name">Responsable</p>
+                </div>
+            </a>
         </nav>
     </main>
 </body>
