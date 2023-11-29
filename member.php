@@ -18,9 +18,9 @@ getToken();
 </head>
 
 <body>
-<?php
-include 'header.php';
-?>
+    <?php
+    include 'header.php';
+    ?>
     <main>
         <div class="header__img">
             <img class="member_img" src="assets/img/creamap_2_-removebg-preview.png" alt="logo amap">
@@ -31,16 +31,17 @@ include 'header.php';
         <ul>
             <?php
             $id = $_SESSION['id_person'];
+            // var_dump($id);
             $query = $dbCo->prepare("SELECT distribution_start, distribution_end, address
                 FROM distribution
                     JOIN quarter USING (id_quarter)
                     JOIN commitment USING (id_quarter)
                     JOIN subscribe USING (id_commitment)
-                WHERE id_amap_user = :user AND id_quarter = 1
+                WHERE id_amap_user = :user AND id_quarter = 550
                 GROUP BY id_distribution;");
 
             $query->execute([
-                'user'=> intval($id)
+                'user' => intval($id)
             ]);
             $result = $query->fetchall();
 
@@ -58,11 +59,12 @@ include 'header.php';
             <?php
             }
             ?>
-        </ul> 
+        </ul>
         <section>
             <h2 class="bg-pink member_title">Abonnements</h2>
             <ul>
                 <?php
+                // var_dump($id);
                 $query = $dbCo->prepare("SELECT product_name FROM (product)
         JOIN commitment USING (id_product)
         JOIN subscribe USING (id_commitment)
@@ -70,7 +72,7 @@ include 'header.php';
         WHERE id_person = :user");
 
                 $query->execute([
-                    'user'=> intval($id)
+                    'user' => intval($id)
                 ]);
                 $result = $query->fetchall();
 
