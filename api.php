@@ -21,8 +21,34 @@ checkCSRFAsync($data);
 checkXSS($data);
 
 // Creation of an account
-if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5 && isset($data['lastname']) && strlen($data['lastname']) > 0 && isset($data['firstname']) && strlen($data['firstname']) > 0) {
+// If their is no firstname/lastname
+if (isset($data['action']) && $data['action'] === 'inscription' && (strlen($data['firstname']) === 0 || strlen($data['lastname']) === 0)) {
+    echo json_encode([
+        'result' => false,
+        'error' => 'Nom et prénom sont obligatoires.'
+    ]);
+    exit;
+}
 
+// If email isn't correct
+else if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+    echo json_encode([
+        'result' => false,
+        'error' => 'L\'email n\'est pas correct.'
+    ]);
+    exit;
+}
+
+// If password length not long enough
+else if (isset($data['action']) && $data['action'] === 'inscription' && strlen($data['pwd']) <= 5) {
+    echo json_encode([
+        'result' => false,
+        'error' => 'Le mot de passe doit contenir au moins 6 caractères.'
+    ]);
+    exit;
+}
+
+if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL) && isset($data['pwd']) && strlen($data['pwd']) > 5 && isset($data['lastname']) && strlen($data['lastname']) > 0 && isset($data['firstname']) && strlen($data['firstname']) > 0) {
     try {
         $query = $dbCo->prepare('SELECT email FROM person;');
         $query->execute();
@@ -66,7 +92,25 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
 }
 
 // Connexion with existing account
-else if (isset($data['action']) && $data['action'] === 'connexion' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5) {
+// If email isn't correct
+else if (isset($data['action']) && $data['action'] === 'connexion' && isset($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+    echo json_encode([
+        'result' => false,
+        'error' => 'L\'email n\'est pas correct.'
+    ]);
+    exit;
+}
+
+// If password length not long enough
+else if (isset($data['action']) && $data['action'] === 'connexion' && strlen($data['pwd']) <= 5) {
+    echo json_encode([
+        'result' => false,
+        'error' => 'Le mot de passe doit contenir au moins 6 caractères.'
+    ]);
+    exit;
+}
+
+else if (isset($data['action']) && $data['action'] === 'connexion' && isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL) && isset($data['pwd']) && strlen($data['pwd']) > 5) {
     try {
         $query = $dbCo->prepare('SELECT id_person, password FROM person WHERE email = :email;');
         $isQueryOk = $query->execute([
