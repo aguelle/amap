@@ -4,6 +4,7 @@
 
     /* COLORS */
     --cream: #CFC0A6;
+    --cream-light: #ddd1bc;
     --grey: #878A8D;
     --green: #4E9760;
     --pink: #C97064;
@@ -37,6 +38,10 @@
 
 .bg-pink {
     background-color: var(--pink);
+}
+
+.bg-cream-light {
+    background-color: var(--cream-light);
 }
 
 .btn {
@@ -122,18 +127,15 @@ h1 {
 }
 
 .member_img {
-
-    width: 75%;
+    width: 50%;
 }
 
 .member_title{
-    color:white;
-    margin :1rem;
-    padding-top : 5px;
-    padding-bottom : 5px;
-    padding-left: 20px;
+    color: white;
+    margin: 1rem;
+    padding: 10px 20px;
     border-radius: 20px;
-    width: 75%;
+    width: 70%;
 }
 
 .footer__img {
@@ -157,11 +159,13 @@ h1 {
     font-size: 1.2rem;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
+.name {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 50px;
 }
 
-.name {
-    margin: 20px;
+.member-bg {
+    padding: 30px 10px 500px 0px;
+    border-radius: 70px;
 }

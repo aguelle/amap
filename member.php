@@ -24,35 +24,47 @@ if (!isset($_SESSION['id_person'])) {
 <body>
 
     <main>
-        <header>
-            <div>
-                <a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
-            </div>
-            <div>
-                <p class="name">
+        <a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
+        <div class="header__img">
+            <img class="member_img" src="assets/img/creamap_2_-removebg-preview.png" alt="logo amap">
+        </div>
+        <p class="name">
                     <?php
                         $query = $dbCo->prepare("SELECT firstname, lastname FROM person WHERE id_person = :id_person;");
                         $query->execute([
                             'id_person' => $_SESSION['id_person']
                         ]);
                         $result = $query->fetch();
-                        echo $result['firstname'] . ' ' . $result['lastname'];
+                        echo "Bienvenue" . ' ' . $result['firstname'] . '.';
                     ?>
                 </p>
-            </div>
-        </header>
-        <div class="header__img">
-            <img class="member_img" src="assets/img/creamap_2_-removebg-preview.png" alt="logo amap">
-        </div>
         <div id="notif-member" class="notif">
             <?php
                 displayNotif();
             ?>
         </div>
+        <div class="bg-cream-light member-bg">
         <section>
+            <p>
+                <?php
+                    // $id = $_SESSION['id_person'];
+                    // $query = $dbCo->prepare("SELECT quarter_number, years
+                    // FROM distribution
+                    //     JOIN quarter USING (id_quarter)
+                    //     JOIN commitment USING (id_quarter)
+                    //     JOIN subscribe USING (id_commitment)
+                    // WHERE id_amap_user = :user AND distribution_start > CURDATE() and payment = 1
+                    // GROUP BY years LIMIT 1
+                    // ");     
+                    // $query->execute([
+                    //     'user' => intval($id),
+                    // ]);
+                    // $result = $query->fetchAll();
+                    // var_dump($result);
+                ?>
+            </p>
             <h2 class="bg-green member_title">A récupérer</h2>
-        </section>
-        <ul>
+            <ul>
             <?php
             $id = $_SESSION['id_person'];
             $query = $dbCo->prepare("SELECT distribution_start, distribution_end, address
@@ -85,8 +97,9 @@ if (!isset($_SESSION['id_person'])) {
             }
             ?>
         </ul>
+        </section>
         <section>
-            <h2 class="bg-pink member_title">Abonnements</h2>
+            <h2 class="bg-green member_title">Abonnements</h2>
             <ul>
                 <?php
                 $query = $dbCo->prepare("SELECT product_name FROM (product)
@@ -112,6 +125,7 @@ if (!isset($_SESSION['id_person'])) {
             </ul>
 
         </section>
+            </div>
     </main>
 
     <script src="./assets/js/functions.js"></script>

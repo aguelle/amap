@@ -9,9 +9,10 @@ CREATE TABLE person(
 
 CREATE TABLE quarter(
    id_quarter INT AUTO_INCREMENT,
-   name_quarter VARCHAR(50),
+   years SMALLINT,
+   quarter_number TINYINT,
    start_date DATETIME,
-   end_date VARCHAR(50),
+   end_date DATETIME,
    PRIMARY KEY(id_quarter)
 );
 

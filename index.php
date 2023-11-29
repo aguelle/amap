@@ -24,8 +24,8 @@ if (isset($_SESSION['id_person'])) {
 <body>
 
     <main>
-        <div class="header__img">
-            <img class="img" src="assets/img/creamap_1_-removebg-preview.png" alt="logo amap">
+    <div class="header__img">
+            <img class="img" src="assets/img/creamap_2_-removebg-preview.png" alt="logo amap">
         </div>
         <h1></h1>
         <div id="notif-index" class="notif">
