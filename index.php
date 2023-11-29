@@ -5,6 +5,7 @@ include_once './includes/_functions.php';
 session_start();
 getToken();
 if (isset($_SESSION['id_person'])) {
+    $_SESSION['notif'] = 'Vous devez vous déconnecter pour revenir à l\'accueil.';
     header('location: member.php');
 };
 ?>

@@ -1,3 +1,9 @@
+if (document.getElementById('notif-index').textContent.length > 0) {
+    setTimeout(() => {
+        document.getElementById('notif-index').textContent = '';
+    }, 3000);
+};
+
 // To create an account
 document.getElementById('create__link').addEventListener('click', function (event) {
     event.preventDefault();
@@ -20,6 +26,12 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
         .then(data => {
             if (data['result'] === true) {
                 document.location.replace('member.php');
+            }
+            else {
+                document.getElementById('notif-index').textContent = data['error'];
+                setTimeout(() => {
+                    document.getElementById('notif-index').textContent = '';
+                }, 3000);
             };
         })
         .catch(error => {
@@ -40,6 +52,12 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
         .then(data => {
             if (data['result'] === true) {
                 document.location.replace('member.php');
+            }
+            else {
+                document.getElementById('notif-index').textContent = data['error'];
+                setTimeout(() => {
+                    document.getElementById('notif-index').textContent = '';
+                }, 3000);
             };
         })
         .catch(error => {

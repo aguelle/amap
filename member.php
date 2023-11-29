@@ -5,6 +5,7 @@ include_once './includes/_functions.php';
 session_start();
 getToken();
 if (!isset($_SESSION['id_person'])) {
+    $_SESSION['notif'] = 'Vous devez être connecté(e) pour accéder à l\'espace membre.';
     header('location: index.php');
 };
 ?>
@@ -21,10 +22,25 @@ if (!isset($_SESSION['id_person'])) {
 </head>
 
 <body>
-    <?php
-        include 'header.php';
-    ?>
+
     <main>
+        <header>
+            <div>
+                <a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
+            </div>
+            <div>
+                <p class="name">
+                    <?php
+                        $query = $dbCo->prepare("SELECT firstname, lastname FROM person WHERE id_person = :id_person;");
+                        $query->execute([
+                            'id_person' => $_SESSION['id_person']
+                        ]);
+                        $result = $query->fetch();
+                        echo $result['firstname'] . ' ' . $result['lastname'];
+                    ?>
+                </p>
+            </div>
+        </header>
         <div class="header__img">
             <img class="member_img" src="assets/img/creamap_2_-removebg-preview.png" alt="logo amap">
         </div>
@@ -100,6 +116,7 @@ if (!isset($_SESSION['id_person'])) {
 
     <script src="./assets/js/functions.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/member.js"></script>
 </body>
 
 </html>
