@@ -33,6 +33,7 @@ getToken();
                 <input id="insc__email" type="email" name="email" placeholder="Email" required>
                 <input id="insc__pwd" type="password" name="password" placeholder="Mot de passe" required>
                 <input id="insc__btn" class="bg-pink insc__btn" type="submit" value="Créer le compte">
+                <button id="index-back__btn" class="index-back__btn bg-pink">Retour</button>
             </form>
             <form id="connexion" class="form flex column align-center justify-between">
                 <input id="conn__email" type="email" name="email" placeholder="Email" required>
@@ -41,8 +42,6 @@ getToken();
                 <input id="conn__btn" class="bg-pink conn__btn" type="submit" value="Se connecter">
                 <p>Vous n'avez pas de compte ? <a href="#" id="create__link" class="create__link">Inscrivez-vous</a></p>
             </form>
-            
-            <button></button>
         </section>
     </main>
 

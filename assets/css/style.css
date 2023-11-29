@@ -89,6 +89,15 @@ input::placeholder {
     position: absolute;
 }
 
+.index-back__btn {
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
 body {
     background-color: var(--cream);
     font-family: var(--primary-font);
