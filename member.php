@@ -18,7 +18,9 @@ getToken();
 </head>
 
 <body>
-<?=include 'header.php'?>
+<?php
+include 'header.php';
+?>
     <main>
         <div class="header__img">
             <img class="member_img" src="assets/img/creamap_2_-removebg-preview.png" alt="logo amap">
@@ -61,7 +63,6 @@ getToken();
             <h2 class="bg-pink member_title">Abonnements</h2>
             <ul>
                 <?php
-// var_dump($_SESSION);
                 $query = $dbCo->prepare("SELECT product_name FROM (product)
         JOIN commitment USING (id_product)
         JOIN subscribe USING (id_commitment)
