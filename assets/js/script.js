@@ -45,3 +45,8 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
             console.error("Error :", error);
         });
 });
+
+document.getElementById('index-back__btn').addEventListener('click', function () {
+    document.getElementById('inscription').classList.add('hidden');
+    document.getElementById('connexion').classList.remove('hidden');
+});
