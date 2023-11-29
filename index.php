@@ -4,6 +4,9 @@ include_once 'includes/_db.php';
 include_once './includes/_functions.php';
 session_start();
 getToken();
+if (isset($_SESSION['id_person'])) {
+    header('location: member.php');
+};
 ?>
 
 <!DOCTYPE html>
@@ -18,9 +21,7 @@ getToken();
 </head>
 
 <body>
-<?php
-// include 'header.php';
-?>
+
     <main>
         <div class="header__img">
             <img class="img" src="assets/img/creamap_1_-removebg-preview.png" alt="logo amap">
@@ -44,10 +45,6 @@ getToken();
             </form>
         </section>
     </main>
-
-    <footer>
-        <!-- <img class="img footer__img" src="assets/img/vegetables2.png" alt="panier de légumes"> -->
-    </footer>
 
     <script src="./assets/js/functions.js"></script>
     <script src="./assets/js/script.js"></script>
