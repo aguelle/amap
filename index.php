@@ -19,7 +19,7 @@ getToken();
 
 <body>
 <?php
-include 'header.php';
+// include 'header.php';
 ?>
     <main>
         <div class="header__img">

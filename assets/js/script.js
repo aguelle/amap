@@ -3,7 +3,7 @@ document.getElementById('create__link').addEventListener('click', function (even
     document.getElementById('inscription').classList.remove('hidden');
     document.getElementById('connexion').classList.add('hidden');
 })
-
+//inscription
 document.getElementById('insc__btn').addEventListener('click', function (event) {
     event.preventDefault();
     const data = {
@@ -25,7 +25,27 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
             console.error("Error :", error);
         });
 });
-
+//connexion
+document.getElementById('conn__btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    const data = {
+        action: 'connexion',
+        token: getToken(),
+        email: document.getElementById('conn__email').value,
+        pwd: document.getElementById('conn__pwd').value
+    };
+    fetchApi('POST', data)
+        .then(data => {
+            if (data['result'] === true) {
+                console.log('On connecte la base de données.')
+                document.location.replace('member.php');
+            }
+        })
+        .catch(error => {
+            console.error("Error :", error);
+        });
+});
+//deconexion
 document.getElementById('conn__btn').addEventListener('click', function (event) {
     event.preventDefault();
     const data = {
