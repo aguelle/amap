@@ -93,6 +93,8 @@ else if (isset($data['action']) && $data['action'] === 'connexion' && isset($dat
                     'idPerson' => $dbCo->lastInsertId()
 
                 ]);
+                // $_SESSION['id_person'] = $dbCo->lastInsertId();
+
             }
         } else {
             // $dbCo->rollBack();
