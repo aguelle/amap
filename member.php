@@ -25,6 +25,11 @@ getToken();
         <div class="header__img">
             <img class="member_img" src="assets/img/creamap_2_-removebg-preview.png" alt="logo amap">
         </div>
+        <div id="notif-member" class="notif">
+            <?php
+                displayNotif();
+            ?>
+        </div>
         <section>
             <h2 class="bg-green member_title">A récupérer</h2>
         </section>

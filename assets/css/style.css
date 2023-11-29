@@ -149,5 +149,10 @@ h1 {
     padding: 15px;
     width: 33%;
     margin :1rem;
-    
+}
+
+.notif {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 1.2rem;
 }
