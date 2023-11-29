@@ -33,15 +33,17 @@ getToken();
             $id = $_SESSION['id_person'];
             var_dump($id);
             $query = $dbCo->prepare("SELECT distribution_start, distribution_end, address
-                FROM distribution
-                    JOIN quarter USING (id_quarter)
-                    JOIN commitment USING (id_quarter)
-                    JOIN subscribe USING (id_commitment)
-                WHERE id_amap_user = :user AND id_quarter = 550
-                GROUP BY id_distribution;");
+            FROM distribution
+                JOIN quarter USING (id_quarter)
+                JOIN commitment USING (id_quarter)
+                JOIN subscribe USING (id_commitment)
+            WHERE id_amap_user = :user AND distribution_start > CURDATE() and payment = 1
+            GROUP BY id_distribution LIMIT 1
+            ");
 
             $query->execute([
-                'user' => intval($id)
+                'user' => intval($id),
+
             ]);
             $result = $query->fetchall();
 
@@ -66,10 +68,12 @@ getToken();
                 <?php
                 var_dump($id);
                 $query = $dbCo->prepare("SELECT product_name FROM (product)
-        JOIN commitment USING (id_product)
-        JOIN subscribe USING (id_commitment)
-        JOIN amap_user USING (id_amap_user)
-        WHERE id_person = :user");
+                JOIN commitment USING (id_product)
+                JOIN quarter USING (id_quarter)
+                JOIN subscribe USING (id_commitment)
+                JOIN amap_user USING (id_amap_user)
+                WHERE id_person = :user AND CURDATE() BETWEEN start_date AND end_date AND payment = 1
+                GROUP BY id_product");
 
                 $query->execute([
                     'user' => intval($id)
