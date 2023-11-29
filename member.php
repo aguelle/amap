@@ -18,7 +18,7 @@ getToken();
 </head>
 
 <body>
-
+<?=include 'header.php'?>
     <main>
         <div class="header__img">
             <img class="member_img" src="assets/img/creamap_2_-removebg-preview.png" alt="logo amap">
