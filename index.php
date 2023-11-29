@@ -53,6 +53,7 @@ if (isset($_SESSION['id_person'])) {
 
     <script src="./assets/js/functions.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/index.js"></script>
 </body>
 
 </html>

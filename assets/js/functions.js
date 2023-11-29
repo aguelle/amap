@@ -17,8 +17,3 @@ async function fetchApi(method, data) {
 function getToken() {
     return document.getElementById('token').value;
 }
-
-function hideNotif() {
-    document.getElementById('notif-index').innerHTML="";
-    document.getElementById('notif-member').innerHTML="";
-  };
