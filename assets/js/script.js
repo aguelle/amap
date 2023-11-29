@@ -3,7 +3,7 @@ document.getElementById('create__link').addEventListener('click', function (even
     document.getElementById('inscription').classList.remove('hidden');
     document.getElementById('connexion').classList.add('hidden');
 })
-
+//inscription
 document.getElementById('insc__btn').addEventListener('click', function (event) {
     event.preventDefault();
     const data = {
@@ -25,7 +25,7 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
             console.error("Error :", error);
         });
 });
-
+//connexion
 document.getElementById('conn__btn').addEventListener('click', function (event) {
     event.preventDefault();
     const data = {
@@ -45,7 +45,7 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
             console.error("Error :", error);
         });
 });
-
+//back btn
 document.getElementById('index-back__btn').addEventListener('click', function () {
     document.getElementById('inscription').classList.add('hidden');
     document.getElementById('connexion').classList.remove('hidden');
