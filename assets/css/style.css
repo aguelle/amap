@@ -80,6 +80,13 @@ input::placeholder {
     color: white;
 }
 
+.index__link {
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
 body {
     background-color: var(--cream);
     font-family: var(--primary-font);
