@@ -31,7 +31,7 @@ getToken();
         <ul>
             <?php
             $id = $_SESSION['id_person'];
-            // var_dump($id);
+            var_dump($id);
             $query = $dbCo->prepare("SELECT distribution_start, distribution_end, address
                 FROM distribution
                     JOIN quarter USING (id_quarter)
@@ -64,7 +64,7 @@ getToken();
             <h2 class="bg-pink member_title">Abonnements</h2>
             <ul>
                 <?php
-                // var_dump($id);
+                var_dump($id);
                 $query = $dbCo->prepare("SELECT product_name FROM (product)
         JOIN commitment USING (id_product)
         JOIN subscribe USING (id_commitment)
