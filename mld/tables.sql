@@ -1,12 +1,9 @@
-
--- CREATE TABLES DATABASE
-
 CREATE TABLE person(
    id_person INT AUTO_INCREMENT,
    firstname VARCHAR(50),
    lastname VARCHAR(50),
    email VARCHAR(50),
-   password VARCHAR(50),
+   password VARCHAR(255),
    PRIMARY KEY(id_person)
 );
 
@@ -38,6 +35,8 @@ CREATE TABLE producer(
 CREATE TABLE distribution(
    id_distribution INT AUTO_INCREMENT,
    address VARCHAR(50),
+   distribution_start DATETIME,
+   distribution_end DATETIME,
    id_quarter INT NOT NULL,
    PRIMARY KEY(id_distribution),
    FOREIGN KEY(id_quarter) REFERENCES quarter(id_quarter)
@@ -79,16 +78,3 @@ CREATE TABLE subscribe(
    FOREIGN KEY(id_amap_user) REFERENCES amap_user(id_amap_user),
    FOREIGN KEY(id_commitment) REFERENCES commitment(id_commitment)
 );
-
--- INSERT VALUES INTO distribution
-
-insert into distribution (address) values ('1 David Pass');
-insert into distribution (address) values ('28 Spaight Way');
-insert into distribution (address) values ('20 Summer Ridge Hill');
-insert into distribution (address) values ('8115 Pearson Junction');
-insert into distribution (address) values ('055 Nobel Pass');
-insert into distribution (address) values ('62240 Independence Street');
-insert into distribution (address) values ('9116 Del Mar Terrace');
-insert into distribution (address) values ('2 Oak Crossing');
-insert into distribution (address) values ('719 Golf Center');
-insert into distribution (address) values ('3 Drewry Parkway');
