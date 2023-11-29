@@ -1,9 +1,11 @@
+// To create an account
 document.getElementById('create__link').addEventListener('click', function (event) {
     event.preventDefault();
     document.getElementById('inscription').classList.remove('hidden');
     document.getElementById('connexion').classList.add('hidden');
 })
-//inscription
+
+// Inscription
 document.getElementById('insc__btn').addEventListener('click', function (event) {
     event.preventDefault();
     const data = {
@@ -17,15 +19,19 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
     fetchApi('POST', data)
         .then(data => {
             if (data['result'] === true) {
-                console.log('On connecte la base de données.')
                 document.location.replace('member.php');
+                document.getElementById('notif-member').textContent = data['notif'];
+            }
+            else {
+                document.getElementById('notif-index').textContent = data['error'];
             }
         })
         .catch(error => {
             console.error("Error :", error);
         });
 });
-//connexion
+
+// Connexion
 document.getElementById('conn__btn').addEventListener('click', function (event) {
     event.preventDefault();
     const data = {
@@ -37,15 +43,19 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
     fetchApi('POST', data)
         .then(data => {
             if (data['result'] === true) {
-                console.log('On connecte la base de données.')
                 document.location.replace('member.php');
+                document.getElementById('notif-member').textContent = data['notif'];
+            }
+            else {
+                document.getElementById('notif-index').textContent = data['error'];
             }
         })
         .catch(error => {
             console.error("Error :", error);
         });
 });
-//back btn
+
+// Back btn
 document.getElementById('index-back__btn').addEventListener('click', function () {
     document.getElementById('inscription').classList.add('hidden');
     document.getElementById('connexion').classList.remove('hidden');

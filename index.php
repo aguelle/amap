@@ -27,6 +27,11 @@ if (isset($_SESSION['id_person'])) {
             <img class="img" src="assets/img/creamap_1_-removebg-preview.png" alt="logo amap">
         </div>
         <h1></h1>
+        <div id="notif-index" class="notif">
+            <?php
+                displayNotif();
+            ?>
+        </div>
         <section>
             <form id="inscription" class="form flex column align-center justify-between hidden">
                 <input id="insc__lastname" type="text" name="lastname" placeholder="Nom" required>

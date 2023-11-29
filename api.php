@@ -36,7 +36,6 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
                 exit;
             };
         };
-        // $dbCo->beginTransaction();
         $query = $dbCo->prepare("INSERT INTO person(lastname, firstname, email, password) VALUES (:lastname, :firstname, :email, :password);");
         $isQueryOk = $query->execute([
             'lastname' => $data['lastname'],
@@ -45,7 +44,7 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
             'password' => password_hash($data['pwd'], PASSWORD_DEFAULT)
         ]);
         if ($isQueryOk) {
-            // $dbCo->commit();
+            $_SESSION['notif'] = 'Votre compte a bien été créé.';
             echo json_encode([
                 'result' => true,
                 'notif' => 'Creation done',
@@ -53,14 +52,12 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
             ]);
             $_SESSION['id_person'] = $dbCo->lastInsertId();
         } else {
-            // $dbCo->rollBack();
             echo json_encode([
                 'result' => false,
                 'error' => 'Problème lors de la création du compte.'
             ]);
         }
     } catch (Exception $e) {
-        // $dbCo->rollBack();
         echo json_encode([
             'result' => false,
             'error' => 'Une erreur s\'est produite : ' . $e->getMessage()
@@ -71,40 +68,42 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
 // Connexion with existing account
 else if (isset($data['action']) && $data['action'] === 'connexion' && isset($data['email']) && strlen($data['email']) > 0 && isset($data['pwd']) && strlen($data['pwd']) > 5) {
     try {
-        // $dbCo->beginTransaction();
         $query = $dbCo->prepare('SELECT id_person, password FROM person WHERE email = :email;');
         $isQueryOk = $query->execute([
             'email' => $data['email']
         ]);
         if ($isQueryOk) {
             $result = $query->fetchAll();
-            // $dbCo->commit();
-            if (!password_verify($data['pwd'], $result[0]['password'])) {
+            if (!isset($result[0])) {
+                echo json_encode([
+                    'result' => false,
+                    'error' => 'L\'adresse email n\'existe pas.'
+                ]);
+                exit;
+            }
+            else if (!password_verify($data['pwd'], $result[0]['password'])) {
                 echo json_encode([
                     'result' => false,
                     'error' => 'Ce n\'est pas le bon mot de passe.'
                 ]);
                 exit;
-            } else {
+            }           
+            else {
                 $_SESSION['id_person'] = $result[0]['id_person'];
+                $_SESSION['notif'] = 'Vous êtes connecté(e).';
                 echo json_encode([
                     'result' => true,
                     'notif' => 'Connexion ok.',
                     'idPerson' => $dbCo->lastInsertId()
-
                 ]);
-                // $_SESSION['id_person'] = $dbCo->lastInsertId();
-
             }
         } else {
-            // $dbCo->rollBack();
             echo json_encode([
                 'result' => false,
                 'error' => 'Problème lors de la connexion au compte.'
             ]);
         }
     } catch (Exception $e) {
-        // $dbCo->rollBack();
         echo json_encode([
             'result' => false,
             'error' => 'Une erreur s\'est produite : ' . $e->getMessage()
@@ -120,5 +119,3 @@ else {
     ]);
     exit;
 }
-
-// $result['id_person'];

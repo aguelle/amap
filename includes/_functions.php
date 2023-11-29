@@ -48,3 +48,16 @@ function checkXSS(array &$array): void
 {
     $array = array_map('strip_tags', $array);
 }
+
+/**
+ * Function to display notification if their is one present in $_SESSION, and then unset it.
+ *
+ * @return void
+ */
+function displayNotif(): void
+{
+    if (isset($_SESSION['notif'])) {
+        echo $_SESSION['notif'];
+        unset($_SESSION['notif']);
+    };
+}
