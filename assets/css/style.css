@@ -130,7 +130,7 @@ h1 {
     width: 50%;
 }
 
-.member_title{
+.member_title {
     color: white;
     margin: 1rem;
     padding: 10px 20px;
@@ -168,4 +168,9 @@ h1 {
 .member-bg {
     padding: 30px 10px 500px 0px;
     border-radius: 70px;
+}
+
+.quarter-ttl {
+    font-size: 1.3rem;
+    margin: 20px 0px 30px 30px;
 }

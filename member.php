@@ -45,22 +45,22 @@ if (!isset($_SESSION['id_person'])) {
         </div>
         <div class="bg-cream-light member-bg">
         <section>
-            <p>
+            <p class="quarter-ttl">
                 <?php
-                    // $id = $_SESSION['id_person'];
-                    // $query = $dbCo->prepare("SELECT quarter_number, years
-                    // FROM distribution
-                    //     JOIN quarter USING (id_quarter)
-                    //     JOIN commitment USING (id_quarter)
-                    //     JOIN subscribe USING (id_commitment)
-                    // WHERE id_amap_user = :user AND distribution_start > CURDATE() and payment = 1
-                    // GROUP BY years LIMIT 1
-                    // ");     
-                    // $query->execute([
-                    //     'user' => intval($id),
-                    // ]);
-                    // $result = $query->fetchAll();
-                    // var_dump($result);
+                    $id = $_SESSION['id_person'];
+                    $query = $dbCo->prepare("SELECT quarter_number, years
+                    FROM distribution
+                        JOIN quarter USING (id_quarter)
+                        JOIN commitment USING (id_quarter)
+                        JOIN subscribe USING (id_commitment)
+                    WHERE id_amap_user = :user AND distribution_start > CURDATE() and payment = 1
+                    GROUP BY id_distribution LIMIT 1
+                    ");     
+                    $query->execute([
+                        'user' => intval($id),
+                    ]);
+                    $result = $query->fetch();
+                    echo 'Pour le ' . $result['quarter_number'] . 'e trimestre ' . $result['years'] . ' :';
                 ?>
             </p>
             <h2 class="bg-green member_title">A récupérer</h2>
