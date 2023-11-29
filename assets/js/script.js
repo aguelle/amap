@@ -1,3 +1,6 @@
+// To hide notif if present
+window.setTimeout(hideNotif, 3000);
+
 // To create an account
 document.getElementById('create__link').addEventListener('click', function (event) {
     event.preventDefault();
