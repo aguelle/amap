@@ -30,15 +30,18 @@ include 'header.php';
         </section>
         <ul>
             <?php
+            $id = $_SESSION['id_person'];
             $query = $dbCo->prepare("SELECT distribution_start, distribution_end, address
                 FROM distribution
                     JOIN quarter USING (id_quarter)
                     JOIN commitment USING (id_quarter)
                     JOIN subscribe USING (id_commitment)
-                WHERE id_amap_user = 1 AND id_quarter = 1
+                WHERE id_amap_user = :user AND id_quarter = 1
                 GROUP BY id_distribution;");
 
-            $query->execute();
+            $query->execute([
+                'user'=> intval($id)
+            ]);
             $result = $query->fetchall();
 
             foreach ($result as $distribution) {
@@ -55,7 +58,7 @@ include 'header.php';
             <?php
             }
             ?>
-        </ul>
+        </ul> 
         <section>
             <h2 class="bg-pink member_title">Abonnements</h2>
             <ul>
@@ -64,9 +67,11 @@ include 'header.php';
         JOIN commitment USING (id_product)
         JOIN subscribe USING (id_commitment)
         JOIN amap_user USING (id_amap_user)
-        WHERE id_person = {$_SESSION['id_person']}");
+        WHERE id_person = :user");
 
-                $query->execute();
+                $query->execute([
+                    'user'=> intval($id)
+                ]);
                 $result = $query->fetchall();
 
                 foreach ($result as $product) {
