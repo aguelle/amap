@@ -46,7 +46,10 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
         ]);
         if ($isQueryOk) {
             $dbCo->commit();
-            echo json_encode('Creation done');
+            echo json_encode([
+                'result' => true,
+                'notif' => 'Creation done'
+            ]);
         } else {
             $dbCo->rollBack();
             echo json_encode([
