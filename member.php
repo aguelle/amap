@@ -58,7 +58,6 @@ getToken();
             <h2 class="bg-pink member_title">Abonnements</h2>
             <ul>
                 <?php
-var_dump($_SESSION);
                 $query = $dbCo->prepare("SELECT product_name FROM (product)
         JOIN commitment USING (id_product)
         JOIN subscribe USING (id_commitment)
