@@ -7,6 +7,7 @@
     --cream-light: #ddd1bc;
     --grey: #878A8D;
     --green: #4E9760;
+    --green-light: #97ba9f;
     --pink: #C97064;
 }
 
@@ -117,6 +118,10 @@ h1 {
     padding-bottom: 30px;
 }
 
+.suscribe {
+    margin-top: 25px;
+}
+
 .header__img {
     display: flex;
     justify-content: center;
@@ -180,4 +185,61 @@ h1 {
 .quarter-ttl {
     font-size: 1.3rem;
     margin: 20px 0px 30px 30px;
+}
+
+.switch-container {
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* SWITCH BUTTON */
+.switch {
+    display: inline-block;
+    position: relative;
+    width: 70px;
+    height: 40px;
+    cursor: pointer;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.switch input {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: 0;
+    height: 0;
+}
+
+.switch input + span {
+    position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background: var(--green-light);
+   border-radius: 20px;
+}
+
+.switch input:checked + span {
+    background: var(--green);
+}
+
+.switch input + span:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    width: 32px;
+    height: 32px;
+    background: white;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: all .5s;
+}
+
+.switch input:checked + span:before {
+    left: 34px;
 }
