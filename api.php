@@ -219,6 +219,89 @@ else if (isset($data['action']) && $data['action'] === 'pwd-modify' && isset($da
     }
 }
 
+else if (isset($data['action']) && $data['action'] === 'addGrower' && isset($data['lastname']) && strlen($data['lastname']) > 0 && isset($data['firstname']) && strlen($data['firstname']) > 0 && isset($data['email']) && strlen($data['email']) > 0 && isset($data['business']) && strlen($data['business']) > 0) {
+    try {
+        $query = $dbCo->prepare('SELECT email FROM person;');
+        $query->execute();
+        $results = $query->fetchAll();
+        foreach($results as $result) {
+            if ($result['email'] === $data['email']) {
+                echo json_encode([
+                    'result' => false,
+                    'error' => 'Cette adresse e-mail existe déjà.'
+                ]);
+                exit;
+            };
+        };
+        $dbCo->beginTransaction();
+        $query1 = $dbCo->prepare('INSERT INTO person (lastname, firstname, email, password) VALUES (:lastname, :firstname, :email, :password);');
+        $isQueryOk1 = $query1->execute([
+            'lastname' => $data['lastname'],
+            'firstname' => $data['firstname'],
+            'email' => $data['email'],
+            'password' => bin2hex(random_bytes(6))
+        ]);
+        if ($isQueryOk1) {
+            $idPerson = $dbCo->lastInsertId();
+            $query2 = $dbCo->prepare('INSERT INTO producer (producer_name, id_person) VALUES (:business, :id);');
+            $isQueryOk2 = $query2->execute([
+                'business' => $data['business'],
+                'id' => $idPerson
+            ]);
+            if ($isQueryOk2) {
+                $idGrower = $dbCo->lastInsertId();
+                $query3 = $dbCo->prepare('SELECT id_amap_user FROM amap_user WHERE id_person = :id;');
+                $isQueryOk3 = $query3->execute([
+                    // 'id' => $_SESSION['id_person']
+                    'id' => 1
+                ]);
+                if ($isQueryOk3) {
+                    $idUser = $query3->fetchColumn();
+                    $query4 = $dbCo->prepare('INSERT INTO manage (id_amap_user, id_producer) VALUES (:idUser, :idGrower);');
+                    $isQueryOk4 = $query4->execute([
+                        'idUser' => $idUser,
+                        'idGrower' => $idGrower
+                    ]);
+                    if ($isQueryOk4) {
+                        $dbCo->commit();
+                        echo json_encode([
+                            'result' => true,
+                            'notif' => 'Producteur ajouté.'
+                        ]);
+                    } else {
+                        $dbCo->rollBack();
+                        echo json_encode([
+                            'result' => false,
+                            'error' => 'Problème lors de l\'ajout du producteur.'
+                        ]);
+                    }
+                } else {
+                    echo json_encode([
+                        'result' => false,
+                        'error' => 'Impossible de cibler le id_amap_user.'
+                    ]);
+                }
+            } else {
+                echo json_encode([
+                    'result' => false,
+                    'error' => 'Problème lors de la mise à jour de la table producer.'
+                ]);
+            }
+        } else {
+            echo json_encode([
+                'result' => false,
+                'error' => 'Problème lors de la mise à jour de la table person.'
+            ]);
+        }
+    } catch (Exception $e) {
+        $dbCo->rollBack();
+        echo json_encode([
+            'result' => false,
+            'error' => 'Une erreur s\'est produite : ' . $e->getMessage()
+        ]);
+    }
+}
+
 // If their is no action available
 else {
     echo json_encode([
