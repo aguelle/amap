@@ -9,6 +9,7 @@ document.getElementById('create__link').addEventListener('click', function (even
     event.preventDefault();
     document.getElementById('inscription').classList.remove('hidden');
     document.getElementById('connexion').classList.add('hidden');
+    // document.getElementById('switch-container').classList.add('hidden');
 });
 
 // Inscription
@@ -41,10 +42,10 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
 
 // Connexion
 // Switch button
-let isProducer = false;
-document.getElementById('switch').addEventListener('click', function (event) {
-    isProducer = event.target.checked;
-});
+// let isProducer = false;
+// document.getElementById('switch').addEventListener('click', function (event) {
+//     isProducer = event.target.checked;
+// });
 
 document.getElementById('conn__btn').addEventListener('click', function (event) {
     event.preventDefault();
@@ -56,8 +57,11 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
     };
     fetchApi('POST', data)
         .then(data => {
-            if (data['result'] === true) {
-                isProducer ? document.location.replace('producer.php') : document.location.replace('member.php');
+            if (data['result'] === true && data['producer' === true]) {
+                document.location.replace('producer.php');
+            }
+            else if (data['result'] === true && data['producer'] === false) {
+                document.location.replace('member.php');
             }
             else {
                 document.getElementById('notif-index').textContent = data['error'];
@@ -75,4 +79,5 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
 document.getElementById('index-back__btn').addEventListener('click', function () {
     document.getElementById('inscription').classList.add('hidden');
     document.getElementById('connexion').classList.remove('hidden');
+    // document.getElementById('switch-container').classList.remove('hidden');
 });
