@@ -139,7 +139,7 @@ h1 {
 }
 
 /********** MANAGER PAGE **********/
-body {
+.manager-body {
     display: grid;
     grid-template-rows: 26vh 74vh;
 }
@@ -151,7 +151,7 @@ a, .add-submit {
 
 
 
-header {
+.manager-header {
     display: flex;
     justify-content: center;
 }
@@ -177,7 +177,7 @@ header {
 
 
 
-main {
+.manager-main {
     display: flex;
     align-items: baseline;
     flex-direction: column;
@@ -333,7 +333,7 @@ main {
 }
 
 
-nav {
+.manager-nav {
     position: fixed;
     left: 0;
     bottom: 0;

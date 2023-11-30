@@ -18,15 +18,15 @@ getToken();
     <title>CreAmap</title>
 </head>
 
-<body>
-    <header>
+<body class="manager-body">
+    <header class="manager-header">
         <div class="header-content">
             <h1 class="hidden">CreAmap</h1>
             <img src="assets/img/creamap_2_-removebg-preview.png" alt="CreAmap second logo" class="scnd-logo">
             <h2 class="welcome-txt">Bienvenue (Prénom)</h2>
         </div>
     </header>
-    <main>
+    <main class="manager-main">
         <section class="display">
             <div class="title-cntnr">
                 <div class="title">
@@ -72,7 +72,7 @@ getToken();
             </div>
             <input type="submit" id="addGrower" value="Ajouter" class="add-submit">
         </form>
-        <nav>
+        <nav class="manager-nav">
             <a href="member.php">
                 <div class="profile-page">
                     <img src="assets/img/user-large-solid.svg" alt="user solid icon" class="nav-icon">
