@@ -66,7 +66,7 @@
     height: 250px;
 }
 
-/* input {
+input {
     font-family: var(--primary-font);
     font-size: 1.2rem;
     width: 80%;
@@ -74,7 +74,7 @@
     margin: 10px;
     border-radius: 10px;
     text-align: center;
-} */
+}
 
 input::placeholder {
     text-align: center;
@@ -374,7 +374,6 @@ a, .add-submit {
     font-weight: 700;
 }
 
-
 .manager-nav {
     position: fixed;
     left: 0;
@@ -416,8 +415,6 @@ a, .add-submit {
 
 .active>.profile-name {
     color: #ffffff;
-}
-=======
     margin :1rem;
 }
 

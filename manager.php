@@ -19,6 +19,8 @@ getToken();
 </head>
 
 <body class="manager-body">
+<a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
+            <a id="pwd-modify__link" class="pwd-modify__link bg-pink" href="">Modifier le mot de passe</a>
     <header class="manager-header">
         <div class="header-content">
             <h1 class="hidden">CreAmap</h1>
