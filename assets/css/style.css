@@ -60,7 +60,7 @@
     height: 250px;
 }
 
-input {
+/* input {
     font-family: var(--primary-font);
     font-size: 1.2rem;
     width: 80%;
@@ -68,7 +68,7 @@ input {
     margin: 10px;
     border-radius: 10px;
     text-align: center;
-}
+} */
 
 input::placeholder {
     text-align: center;
@@ -144,7 +144,8 @@ body {
     grid-template-rows: 26vh 74vh;
 }
 
-button, a {
+button,
+a {
     cursor: pointer;
 }
 
@@ -177,6 +178,9 @@ header {
 
 
 main {
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
     gap: 34px;
     background-color: #ffffff59;
     border-radius: 40px 40px 0 0;
@@ -279,6 +283,7 @@ main {
     display: flex;
     gap: 40px;
     padding: 5px 20px;
+    height: 40px;
 }
 
 .add-txt {
@@ -291,6 +296,43 @@ main {
 }
 
 
+.add-form,
+.inputs-cntnr {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-form {
+    gap: 24px;
+}
+
+.inputs-cntnr {
+    gap: 12px;
+}
+
+.input {
+    border-radius: 8px;
+    height: 35px;
+    width: 280px;
+}
+
+.input::placeholder {
+    color: #878a8d;
+}
+
+.add-submit {
+    background-color: #c4ae82;
+    border-radius: 8px;
+    height: 40px;
+    width: 290px;
+    color: #ffffff;
+    font-family: var(--primary-font);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
 nav {
     position: fixed;
     left: 0;
@@ -299,9 +341,9 @@ nav {
     background-color: #ca7368;
     border-radius: 40px 40px 0 0;
     display: flex;
-    gap: 32px;
+    justify-content: space-evenly;
+    /* gap: 32px; */
     height: 80px;
-    justify-content: center;
     width: 100%;
 }
 
