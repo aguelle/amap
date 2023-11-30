@@ -155,6 +155,70 @@ else if (isset($data['action']) && $data['action'] === 'connexion' && isset($dat
     }
 }
 
+// Change password
+// First we verify actual password
+else if (isset($data['action']) && $data['action'] === 'pwd-verify' && isset($data['id']) && isset($data['pwd']) && strlen($data['pwd']) > 5) {
+    try {
+        $query = $dbCo->prepare('SELECT password FROM person WHERE id_person = :id;');
+        $isQueryOk = $query->execute([
+            'id' => $data['id']
+        ]);
+        if ($isQueryOk) {
+            $result = $query->fetch();
+            if (!password_verify($data['pwd'], $result['password'])) {
+                echo json_encode([
+                    'result' => false,
+                    'error' => 'Ce n\'est pas le bon mot de passe.'
+                ]);
+                exit;
+            }           
+            else {
+                echo json_encode([
+                    'result' => true,
+                    'notif' => 'Rentrez votre nouveau mot de passe.',
+                ]);
+            }
+        } else {
+            echo json_encode([
+                'result' => false,
+                'error' => 'Problème lors de la vérification du mot de passe.'
+            ]);
+        }
+    } catch (Exception $e) {
+        echo json_encode([
+            'result' => false,
+            'error' => 'Une erreur s\'est produite : ' . $e->getMessage()
+        ]);
+    }
+}
+
+// Then we store the new password
+else if (isset($data['action']) && $data['action'] === 'pwd-modify' && isset($data['id']) && isset($data['pwd']) && strlen($data['pwd']) > 5) {
+    try {
+        $query = $dbCo->prepare("UPDATE person SET password = :pwd WHERE id_person = :id;");
+        $isQueryOk = $query->execute([
+            'id' => $data['id'],
+            'pwd' => password_hash($data['pwd'], PASSWORD_DEFAULT)
+        ]);
+        if ($isQueryOk) {
+            echo json_encode([
+                'result' => true,
+                'notif' => 'Votre mot de passe a été modifié.',
+            ]);
+        } else {
+            echo json_encode([
+                'result' => false,
+                'error' => 'Problème lors du changement de mot de passe.'
+            ]);
+        }
+    } catch (Exception $e) {
+        echo json_encode([
+            'result' => false,
+            'error' => 'Une erreur s\'est produite : ' . $e->getMessage()
+        ]);
+    }
+}
+
 // If their is no action available
 else {
     echo json_encode([
