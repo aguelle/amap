@@ -40,6 +40,12 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
 });
 
 // Connexion
+// Switch button
+let isProducer = false;
+document.getElementById('switch').addEventListener('click', function (event) {
+    isProducer = event.target.checked;
+});
+
 document.getElementById('conn__btn').addEventListener('click', function (event) {
     event.preventDefault();
     const data = {
@@ -51,7 +57,7 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
     fetchApi('POST', data)
         .then(data => {
             if (data['result'] === true) {
-                document.location.replace('member.php');
+                isProducer ? document.location.replace('producer.php') : document.location.replace('member.php');
             }
             else {
                 document.getElementById('notif-index').textContent = data['error'];
