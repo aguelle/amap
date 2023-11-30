@@ -49,13 +49,13 @@ if (isset($_SESSION['id_person'])) {
                 <input id="conn__btn" class="bg-pink conn__btn" type="submit" value="Se connecter">
                 <p class="suscribe">Vous n'avez pas de compte ? <a href="#" id="create__link" class="create__link">Inscrivez-vous</a></p>
             </form>
-            <div class="switch-container flex">
+            <!-- <div id="switch-container" class="switch-container flex">
                 <P>Vous êtes producteur ?</p>
                 <label class="switch">
                     <input id="switch" type="checkbox">
                     <span></span>
                 </label>
-            </div>
+            </div> -->
         </section>
     </main>
 
