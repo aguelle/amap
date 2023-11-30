@@ -88,7 +88,7 @@ if (!isset($_SESSION['id_person'])) {
                 $time1 = date_format($datetime, 'H:i');
                 $time2 = date_format(date_create($distribution['distribution_end']), 'H:i');
             ?>
-                <li class="product">
+                <li class="distrib">
                     <p>Au <?= $distribution['address'] ?></p>
                     <p>Le <?= $date ?> de <?= $time1 ?> à <?= $time2 ?></p>
                 </li>
@@ -100,9 +100,9 @@ if (!isset($_SESSION['id_person'])) {
         </section>
         <section>
             <h2 class="bg-green member_title">Abonnements</h2>
-            <ul>
+            <ul class="flex">
                 <?php
-                $query = $dbCo->prepare("SELECT product_name FROM (product)
+                $query = $dbCo->prepare("SELECT quantity, product_name FROM (product)
                 JOIN commitment USING (id_product)
                 JOIN quarter USING (id_quarter)
                 JOIN subscribe USING (id_commitment)
@@ -117,7 +117,7 @@ if (!isset($_SESSION['id_person'])) {
 
                 foreach ($result as $product) {
                 ?>
-                    <li class="product"><?= $product['product_name'] ?></li>
+                    <li class="product flex "><?= $product['quantity'] ?> <?= $product['product_name'] ?></li>
 
                 <?php
                 }
