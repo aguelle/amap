@@ -53,7 +53,7 @@
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .form {
@@ -145,7 +145,7 @@ body {
 }
 
 button,
-a {
+a, .add-submit {
     cursor: pointer;
 }
 

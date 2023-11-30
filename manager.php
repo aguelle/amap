@@ -1,11 +1,11 @@
-<!-- <?php
+<?php
 require 'vendor/autoload.php';
 include_once 'includes/_db.php';
 include_once 'includes/_functions.php';
 
 session_start();
 getToken();
-?> -->
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,19 +55,22 @@ getToken();
             </div>
         </section>
         <section class="add">
-            <button class="grower-btn">
+            <button class="grower-btn" id="displayGrowerForm">
                 <div class="add-grower">
                     <p class="add-txt">Ajouter un producteur</p>
                     <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
                 </div>
             </button>
         </section>
-        <form action="" class="add-form">
+        <form action="" class="add-form hidden" id="growerForm">
             <div class="inputs-cntnr">
-                <input type="text" name="" id="" placeholder="Nom de l'entreprise" class="input">
-                <input type="email" name="" id="" placeholder="E-mail" class="input">
+                <input type="text" id="lastname" name="lastname" placeholder="Nom" class="input">
+                <input type="text" id="firstname" name="firstname" placeholder="Prénom" class="input">
+                <input type="email" id="email" name="email" placeholder="E-mail" class="input">
+                <input type="text" id="business" name="business" placeholder="Nom de l'entreprise" class="input">
+                <input type="hidden" id="token" name="token" value="<?= $_SESSION['token'] ?>">
             </div>
-            <input type="submit" value="Ajouter" class="add-submit">
+            <input type="submit" id="addGrower" value="Ajouter" class="add-submit">
         </form>
         <nav>
             <a href="member.php">
@@ -84,6 +87,8 @@ getToken();
             </a>
         </nav>
     </main>
+    <script src="./assets/js/functions.js"></script>
+    <script src="manager.js"></script>
 </body>
 
 </html>
