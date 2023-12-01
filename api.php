@@ -256,8 +256,7 @@ else if (isset($data['action']) && $data['action'] === 'addGrower' && isset($dat
                 $idGrower = $dbCo->lastInsertId();
                 $query3 = $dbCo->prepare('SELECT id_amap_user FROM amap_user WHERE id_person = :id;');
                 $isQueryOk3 = $query3->execute([
-                    // 'id' => $_SESSION['id_person']
-                    'id' => 1
+                    'id' => $_SESSION['id_person']
                 ]);
                 if ($isQueryOk3) {
                     $idUser = $query3->fetchColumn();
