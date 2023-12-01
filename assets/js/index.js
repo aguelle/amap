@@ -42,10 +42,10 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
 
 // Connexion
 // Switch button
-// let isProducer = false;
-// document.getElementById('switch').addEventListener('click', function (event) {
-//     isProducer = event.target.checked;
-// });
+let isProducer = false;
+document.getElementById('switch').addEventListener('click', function (event) {
+    isProducer = event.target.checked;
+});
 
 document.getElementById('conn__btn').addEventListener('click', function (event) {
     event.preventDefault();
