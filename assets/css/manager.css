@@ -183,6 +183,17 @@ a,
     gap: 24px;
 }
 
+.add-form-product,
+.inputs-cntnr {
+    align-items: center;
+    display: flex;
+}
+
+
+.add-form-product {
+    gap: 12px;
+}
+
 .inputs-cntnr {
     gap: 12px;
 }
@@ -191,6 +202,22 @@ a,
     border-radius: 8px;
     height: 35px;
     width: 280px;
+}
+
+.input-product {
+    border-radius: 8px;
+    height: 35px;
+    width: 280px;
+}
+
+.input-product-valid {
+    border-radius: 8px;
+    height: 40px;
+    width: 180px;
+    background-color: #c4ae82;
+    color: #ffffff;
+    font-family: var(--primary-font);
+    font-size: 20px;
 }
 
 .input::placeholder {

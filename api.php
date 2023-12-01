@@ -223,6 +223,7 @@ else if (isset($data['action']) && $data['action'] === 'pwd-modify' && isset($da
     }
 }
 
+// Add Grower
 else if (isset($data['action']) && $data['action'] === 'addGrower' && isset($data['lastname']) && strlen($data['lastname']) > 0 && isset($data['firstname']) && strlen($data['firstname']) > 0 && isset($data['email']) && strlen($data['email']) > 0 && isset($data['business']) && strlen($data['business']) > 0) {
     try {
         $query = $dbCo->prepare('SELECT email FROM person;');
@@ -256,7 +257,8 @@ else if (isset($data['action']) && $data['action'] === 'addGrower' && isset($dat
                 $idGrower = $dbCo->lastInsertId();
                 $query3 = $dbCo->prepare('SELECT id_amap_user FROM amap_user WHERE id_person = :id;');
                 $isQueryOk3 = $query3->execute([
-                    'id' => $_SESSION['id_person']
+                    // 'id' => $_SESSION['id_person']
+                    'id' => 1
                 ]);
                 if ($isQueryOk3) {
                     $idUser = $query3->fetchColumn();
@@ -304,6 +306,34 @@ else if (isset($data['action']) && $data['action'] === 'addGrower' && isset($dat
         ]);
     }
 }
+
+// //Add Product
+// else if (isset($data['action']) && $data['action'] === 'addProduct' && isset($data['name']) && strlen($data['name']) >= 2) {
+//     try {
+       
+//         $query = $dbCo->prepare('INSERT INTO product (product_name) VALUES (:name);');
+//         $isQueryOk = $query->execute([
+//             'name' => $data['name'],
+//             // 'id_producer' => $data['firstname'],
+//         ]);
+//     } else { 
+//                            echo json_encode([
+//                             'result' => false,
+//                             'error' => 'Problème lors de l\'ajout du producteur.'
+//                         ]);
+//                     }
+                
+//      catch (Exception $e) {
+//         $dbCo->rollBack();
+//         echo json_encode([
+//             'result' => false,
+//             'error' => 'Une erreur s\'est produite : ' . $e->getMessage()
+//         ]);
+//     }
+// }
+
+
+
 
 // If their is no action available
 else {

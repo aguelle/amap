@@ -5,7 +5,7 @@ include_once 'includes/_functions.php';
 
 session_start();
 getToken();
-$_SESSION['id_person'] = 8;
+// $_SESSION['id_person'] = 8;
 ?>
 
 <!DOCTYPE html>
@@ -16,12 +16,13 @@ $_SESSION['id_person'] = 8;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/manager.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>CreAmap</title>
 </head>
 
 <body class="manager-body">
-<a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
-            <a id="pwd-modify__link" class="pwd-modify__link bg-pink" href="">Modifier le mot de passe</a>
+    <a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
+    <a id="pwd-modify__link" class="pwd-modify__link bg-pink" href="">Modifier le mot de passe</a>
     <header class="manager-header">
         <?php
         $displayName = $dbCo->prepare('SELECT firstname FROM person WHERE id_person = :id;');
@@ -57,14 +58,23 @@ $_SESSION['id_person'] = 8;
                     <div class="title">
                         <h3 class="title-txt"><?= $grower['producer_name'] ?></h3>
                     </div>
-                    <button class="product-btn">
-                        <div class="add-product">
-                            <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
-                        </div>
-                    </button>
+                    <section>
+                        <button class="product-btn" id="displayProductForm" data-id-grower="<?=$grower['id_producer']?>">
+                            <div class="add-product">
+                                <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
+                            </div>
+                        </button>
+                    </section>
                 </div>
                 <div class="list-cntnr">
-                    <ul class="list-content">
+                    <ul class="list-content" >
+                        <form action="" class="add-form-product hidden" data-id-grower="<?=$grower['id_producer']?>" id="productForm">
+                            <div class="inputs-cntnr">
+                                <input class="input-product" type="text" id="product-name" name="product-name" placeholder="Nom du produit">
+                                <input type="hidden" id="token" name="token" value="<?= $_SESSION['token'] ?>">
+                            </div>
+                            <input type="submit" id="addProduct" value="Ajouter produit" class="input-product-valid">
+                        </form>
                         <?php
                         $displayProducts = $dbCo->prepare('SELECT id_product, product_name, SUM(quantity) AS ttl_qty FROM product JOIN commitment USING (id_product) JOIN subscribe USING (id_commitment) WHERE id_producer = :id GROUP BY id_commitment;');
                         $displayProducts->execute([
