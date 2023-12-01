@@ -37,13 +37,13 @@ getToken();
             <img src="assets/img/creamap_2_-removebg-preview.png" alt="CreAmap second logo" class="scnd-logo">
             <h2 class="welcome-txt">Bienvenue <?= $name ?></h2>
         </div>
+    </header>
+    <main class="manager-main">
         <div id="notif-producer" class="notif">
             <?php
             displayNotif();
             ?>
         </div>
-    </header>
-    <main class="manager-main">
         <?php
         $query = $dbCo->prepare('SELECT id_amap_user FROM amap_user WHERE id_person = :id;');
         $query->execute([

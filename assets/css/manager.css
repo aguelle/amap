@@ -41,6 +41,7 @@ a,
     align-items: center;
     display: inline-flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .scnd-logo {
