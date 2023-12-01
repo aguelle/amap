@@ -38,12 +38,12 @@ $_SESSION['id_person'] = 139;
             <h2 class="welcome-txt">Bienvenue <?= $name ?></h2>
         </div>
     </header>
+    <div id="notif-producer" class="notif">
+        <?php
+        displayNotif();
+        ?>
+    </div>
     <main class="manager-main">
-        <div id="notif-producer" class="notif">
-            <?php
-            displayNotif();
-            ?>
-        </div>
   
         <section class="growers-cntnr" id="growers">
             <?php
