@@ -259,14 +259,14 @@ nav {
     margin: 20px 0px 30px 30px;
 }
 
-.switch-container {
+/* .switch-container {
     margin-top: 30px;
     justify-content: center;
     align-items: center;
-}
+} */
 
 /* SWITCH BUTTON */
-.switch {
+/* .switch {
     display: inline-block;
     position: relative;
     width: 70px;
@@ -314,4 +314,4 @@ nav {
 
 .switch input:checked + span:before {
     left: 34px;
-}
+} */

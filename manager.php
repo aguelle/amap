@@ -36,6 +36,11 @@ $_SESSION['id_person'] = 139;
             <img src="assets/img/creamap_2_-removebg-preview.png" alt="CreAmap second logo" class="scnd-logo">
             <h2 class="welcome-txt">Bienvenue <?= $name ?></h2>
         </div>
+        <div id="notif-producer" class="notif">
+            <?php
+            displayNotif();
+            ?>
+        </div>
     </header>
     <main class="manager-main">
         <section class="growers-cntnr" id="growers">

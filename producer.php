@@ -24,7 +24,25 @@ if (!isset($_SESSION['id_person'])) {
 <body>
 
     <main>
-        <a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
+        <div class="flex justify-between">
+            <a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
+            <a id="pwd-modify__link" class="pwd-modify__link bg-pink" href="">Modifier le mot de passe</a>
+
+            <form id="form__pwd-verify" class="form-member hidden">
+                <input id="pwd-verify__id" type="hidden" name="id" value="<?=$_SESSION['id_person']?>">
+                <input id="token" type="hidden" name="token" value="<?=$_SESSION['token']?>">
+                <input id="pwd-verify__field" type="password" name="pwd-verify" placeholder="Veuillez rentrer votre mot de passe.">
+                <input id="pwd-verify__btn" type="submit" value="Confirmer">
+            </form>
+
+            <form id="form__pwd-modify" class="form-member hidden">
+                <input id="pwd-modify__id" type="hidden" name="id" value="<?=$_SESSION['id_person']?>">
+                <input id="token" type="hidden" name="token" value="<?=$_SESSION['token']?>">
+                <input id="pwd-modify__field" type="password" name="pwd-verify" placeholder="Renseignez votre nouveau mot de passe.">
+                <input id="pwd-modify__btn" type="submit" value="Confirmer">
+            </form>
+
+        </div>
         <div class="header__img">
             <img class="member_img" src="assets/img/creamap_2_-removebg-preview.png" alt="logo amap">
         </div>
@@ -38,7 +56,7 @@ if (!isset($_SESSION['id_person'])) {
             echo "Bienvenue" . ' ' . $result['firstname'] . '.';
             ?>
         </p>
-        <div id="notif-member" class="notif">
+        <div id="notif-producer" class="notif">
             <?php
             displayNotif();
             ?>
@@ -62,7 +80,7 @@ if (!isset($_SESSION['id_person'])) {
                         'user' => intval($id),
                     ]);
                     $result = $query->fetch();
-                    echo 'Pour le ' . $result['quarter_number'] . 'e trimestre ' . $result['years'] . ' :';
+                    if ($result) echo 'Pour le ' . $result['quarter_number'] . 'e trimestre ' . $result['years'] . ' :';   
                     ?>
                 </p>
 
@@ -140,8 +158,7 @@ foreach ($result as $product) {
         </nav>
 
     <script src="./assets/js/functions.js"></script>
-    <script src="./assets/js/script.js"></script>
-    <script src="./assets/js/member.js"></script>
+    <script src="./assets/js/producer.js"></script>
 </body>
 
 </html>

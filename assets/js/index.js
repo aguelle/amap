@@ -42,10 +42,10 @@ document.getElementById('insc__btn').addEventListener('click', function (event) 
 
 // Connexion
 // Switch button
-let isProducer = false;
-document.getElementById('switch').addEventListener('click', function (event) {
-    isProducer = event.target.checked;
-});
+// let isProducer = false;
+// document.getElementById('switch').addEventListener('click', function (event) {
+//     isProducer = event.target.checked;
+// });
 
 document.getElementById('conn__btn').addEventListener('click', function (event) {
     event.preventDefault();
@@ -57,10 +57,13 @@ document.getElementById('conn__btn').addEventListener('click', function (event) 
     };
     fetchApi('POST', data)
         .then(data => {
-            if (data['result'] === true && data['producer' === true]) {
+            if (data['result'] && data['producer']) {
                 document.location.replace('producer.php');
             }
-            else if (data['result'] === true && data['producer'] === false) {
+            else if (data['result'] && data['manager']) {
+                document.location.replace('manager.php');
+            }
+            else if (data['result']) {
                 document.location.replace('member.php');
             }
             else {
