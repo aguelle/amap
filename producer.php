@@ -70,38 +70,45 @@ if (!isset($_SESSION['id_person'])) {
             <section>
                 <h2 class="bg-green member_title">A livrer</h2>
                 <?php
-                    $query = $dbCo->prepare("SELECT product_name, address, producer_name, quantity
+                    $query = $dbCo->prepare("SELECT product_name, address, producer_name, quantity, distribution_start, distribution_end, id_distribution
                 FROM product
                 JOIN commitment USING (id_product)
                 JOIN subscribe USING (id_commitment)
                 JOIN quarter USING (id_quarter)
                 JOIN distribution USING (id_quarter)
                 JOIN producer USING (id_producer)
-                WHERE id_producer = :user AND distribution_start > CURDATE() and payment = 1
+                WHERE id_person = :user AND distribution_start > CURDATE() and payment = 1
                 GROUP BY id_distribution");
 
 $query->execute([
-    'user' => intval($id)
+    'user' => intval($id),
 ]);
 $result = $query->fetchall();
 
 foreach ($result as $product) {
+    $distrib = $product['id_distribution'];
+    $datetime = date_create($product['distribution_start']);
+    $date = date_format($datetime, 'd/m');
+    $time1 = date_format($datetime, 'H:i');
+    $time2 = date_format(date_create($product['distribution_end']), 'H:i');
     ?>
-                   <h3 class="quarter-ttl ">Au <?= $product['address'] ?></h3>
+                   <h3 class="quarter-ttl ">Le <?=$date?> de <?=$time1?> à <?=$time2?>, au <?= $product['address'] ?></h3>
+
                    <ul class="display">
                    <?php
-                    $query = $dbCo->prepare("SELECT product_name, address, producer_name, SUM(quantity) AS totalqty
+                    $query = $dbCo->prepare("SELECT product_name, address, producer_name, SUM(quantity) AS totalqty, id_distribution
                 FROM product
                 JOIN commitment USING (id_product)
                 JOIN subscribe USING (id_commitment)
                 JOIN quarter USING (id_quarter)
                 JOIN distribution USING (id_quarter)
                 JOIN producer USING (id_producer)
-                WHERE id_producer = :user AND distribution_start > CURDATE() and payment = 1
+                WHERE id_person = :user AND id_distribution = :distrib
                 GROUP BY id_product");
 
                     $query->execute([
-                        'user' => intval($id)
+                        'user' => intval($id),
+                        'distrib' => $distrib
                     ]);
                     $result = $query->fetchall();
 
@@ -122,6 +129,15 @@ foreach ($result as $product) {
             </section>
         </div>
     </main>
+        <nav >
+            <a href="">
+                <div class="profile-page">
+                    <img src="assets/img/user-tie-solid.svg" alt="user solid icon" class="nav-icon">
+                    <p class="profile-name">Producteur</p>
+                </div>
+            </a>
+            
+        </nav>
 
     <script src="./assets/js/functions.js"></script>
     <script src="./assets/js/script.js"></script>

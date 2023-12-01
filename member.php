@@ -144,6 +144,20 @@ if (!isset($_SESSION['id_person'])) {
 
         </section>
             </div>
+            <nav class="manager-nav">
+            <a href="member.php">
+                <div class="profile-page active">
+                    <img src="assets/img/user-large-solid.svg" alt="user solid icon" class="nav-icon">
+                    <p class="profile-name">Adhérent</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="profile-page inactive">
+                    <img src="assets/img/user-group-solid.svg" alt="user group solid icon" class="nav-icon">
+                    <p class="profile-name">Responsable</p>
+                </div>
+            </a>
+        </nav>
     </main>
 
     <script src="./assets/js/functions.js"></script>
