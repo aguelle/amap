@@ -5,7 +5,7 @@ include_once 'includes/_functions.php';
 
 session_start();
 getToken();
-
+$_SESSION['id_person'] = 139;
 ?>
 
 <!DOCTYPE html>
@@ -145,7 +145,7 @@ getToken();
             </div>
             <div class="list-cntnr">
                 <ul class="list-content">
-                    
+
                 </ul>
             </div>
         </div>

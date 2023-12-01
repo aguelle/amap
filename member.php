@@ -151,7 +151,7 @@ if (!isset($_SESSION['id_person'])) {
                     <p class="profile-name">Adhérent</p>
                 </div>
             </a>
-            <a href="#">
+            <a href="manager.php">
                 <div class="profile-page inactive">
                     <img src="assets/img/user-group-solid.svg" alt="user group solid icon" class="nav-icon">
                     <p class="profile-name">Responsable</p>

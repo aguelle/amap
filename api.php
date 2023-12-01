@@ -312,6 +312,39 @@ else if (isset($data['action']) && $data['action'] === 'addGrower' && isset($dat
     }
 }
 
+else if (isset($data['action']) && $data['action'] === 'deleteProduct' && isset($data['id'])) {
+    // var_dump($data['id']);
+    // if (!is_int($data['id'])) {
+    //     echo json_encode([
+    //         'result' => false,
+    //         'error' => 'Le id_product n\'est pas valide.'
+    //     ]);
+    //     exit;
+    // };
+    try {
+        $dbCo->beginTransaction();
+        $query = $dbCo->prepare('DELETE FROM product WHERE id_product = :id;');
+        $query->execute([
+            'id' => $data['id']
+        ]);
+        if ($query->rowCount() !== 1) {
+            throw new Exception('Nombre incohérent de lignes affectées par la suppression.');
+        }
+        if ($dbCo->commit()) {
+            echo json_encode([
+                'result' => true,
+                'notif' => 'Produit supprimé.'
+            ]);
+        }
+    } catch (Exception $e) {
+        $dbCo->rollBack();
+        echo json_encode([
+            'result' => false,
+            'error' => 'Erreur lors de la suppression du produit.'
+        ]);
+    }
+}
+
 // If their is no action available
 else {
     echo json_encode([
