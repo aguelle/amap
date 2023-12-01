@@ -269,7 +269,8 @@ else if (isset($data['action']) && $data['action'] === 'addGrower' && isset($dat
                         $dbCo->commit();
                         echo json_encode([
                             'result' => true,
-                            'notif' => 'Producteur ajouté.'
+                            'notif' => 'Producteur ajouté.',
+                            'business' => $data['business']
                         ]);
                     } else {
                         $dbCo->rollBack();

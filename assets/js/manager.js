@@ -19,7 +19,14 @@ document.getElementById('addGrower').addEventListener('click', function(event) {
     fetchApi('POST', data)
         .then(data => {
             console.log(data);
-            location.reload();
+            // location.reload();
+            if (!data.result) {
+                return;
+            }
+            const growerElement = document.importNode(document.getElementById('growerTemplate').content, true);
+            growerElement.querySelector('[data-content="business"]').innerText = data.business;
+            document.getElementById('growers').prepend(growerElement);
+
             growerForm.classList.add('hidden');
         })
         .catch(error => {
