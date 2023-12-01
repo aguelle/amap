@@ -5,7 +5,7 @@ include_once 'includes/_functions.php';
 
 session_start();
 getToken();
-// $_SESSION['id_person'] = 8;
+
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +21,8 @@ getToken();
 </head>
 
 <body class="manager-body">
-<a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
-            <a id="pwd-modify__link" class="pwd-modify__link bg-pink" href="">Modifier le mot de passe</a>
+    <a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
+    <a id="pwd-modify__link" class="pwd-modify__link bg-pink" href="">Modifier le mot de passe</a>
     <header class="manager-header">
         <?php
         $displayName = $dbCo->prepare('SELECT firstname FROM person WHERE id_person = :id;');
@@ -43,59 +43,61 @@ getToken();
         </div>
     </header>
     <main class="manager-main">
-        <?php
-        $query = $dbCo->prepare('SELECT id_amap_user FROM amap_user WHERE id_person = :id;');
-        $query->execute([
-            'id' => $_SESSION['id_person']
-        ]);
-        $idUser = $query->fetchColumn();
+        <section class="growers-cntnr" id="growers">
+            <?php
+            $query = $dbCo->prepare('SELECT id_amap_user FROM amap_user WHERE id_person = :id;');
+            $query->execute([
+                'id' => $_SESSION['id_person']
+            ]);
+            $idUser = $query->fetchColumn();
 
-        $displayGrowers = $dbCo->prepare('SELECT id_producer, producer_name FROM producer JOIN manage USING (id_producer) WHERE id_amap_user = :id;');
-        $displayGrowers->execute([
-            'id' => $idUser
-        ]);
-        $growers = $displayGrowers->fetchAll();
+            $displayGrowers = $dbCo->prepare('SELECT id_producer, producer_name FROM producer JOIN manage USING (id_producer) WHERE id_amap_user = :id ORDER BY id_producer DESC;');
+            $displayGrowers->execute([
+                'id' => $idUser
+            ]);
+            $growers = $displayGrowers->fetchAll();
 
-        foreach ($growers as $grower) {
-        ?>
-            <section class="display">
-                <div class="title-cntnr">
-                    <div class="title">
-                        <h3 class="title-txt"><?= $grower['producer_name'] ?></h3>
-                    </div>
-                    <button class="product-btn">
-                        <div class="add-product">
-                            <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
+            foreach ($growers as $grower) {
+            ?>
+                <div class="display">
+                    <div class="title-cntnr">
+                        <div class="title">
+                            <h3 class="title-txt"><?= $grower['producer_name'] ?></h3>
                         </div>
-                    </button>
-                </div>
-                <div class="list-cntnr">
-                    <ul class="list-content">
-                        <?php
-                        $displayProducts = $dbCo->prepare('SELECT id_product, product_name, SUM(quantity) AS ttl_qty FROM product JOIN commitment USING (id_product) JOIN subscribe USING (id_commitment) WHERE id_producer = :id GROUP BY id_commitment;');
-                        $displayProducts->execute([
-                            'id' => $grower['id_producer']
-                        ]);
-                        $products = $displayProducts->fetchAll();
+                        <button class="product-btn">
+                            <div class="add-product">
+                                <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
+                            </div>
+                        </button>
+                    </div>
+                    <div class="list-cntnr">
+                        <ul class="list-content">
+                            <?php
+                            $displayProducts = $dbCo->prepare('SELECT id_product, product_name, SUM(quantity) AS ttl_qty FROM product JOIN commitment USING (id_product) JOIN subscribe USING (id_commitment) WHERE id_producer = :id GROUP BY id_commitment;');
+                            $displayProducts->execute([
+                                'id' => $grower['id_producer']
+                            ]);
+                            $products = $displayProducts->fetchAll();
 
-                        foreach ($products as $product) {
-                        ?>
-                            <li data-id-product="<?= $product['id_product'] ?>" class="product-cntnr">
-                                <h4 class="product-title"><?= $product['ttl_qty'] ?> <?= $product['product_name'] ?></h4>
-                                <div class="icons-cntnr">
-                                    <button class="edit-btn" id="editBtn">
-                                        <img src="assets/img/pencil-solid.svg" alt="pencil solid logo" class="icon">
-                                    </button>
-                                    <button class="delete-btn" id="deleteBtn">
-                                        <img src="assets/img/trash-can-solid.svg" alt="trash can solid logo" class="icon">
-                                    </button>
-                                </div>
-                            </li>
-                        <?php } ?>
-                    </ul>
+                            foreach ($products as $product) {
+                            ?>
+                                <li data-id-product="<?= $product['id_product'] ?>" class="product-cntnr">
+                                    <h4 class="product-title"><?= $product['ttl_qty'] ?> <?= $product['product_name'] ?></h4>
+                                    <div class="icons-cntnr">
+                                        <button class="edit-btn" id="editBtn">
+                                            <img src="assets/img/pencil-solid.svg" alt="pencil solid logo" class="icon">
+                                        </button>
+                                        <button class="delete-btn" id="deleteBtn">
+                                            <img src="assets/img/trash-can-solid.svg" alt="trash can solid logo" class="icon">
+                                        </button>
+                                    </div>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
                 </div>
-            </section>
-        <?php } ?>
+            <?php } ?>
+        </section>
         <section class="add">
             <button class="grower-btn" id="displayGrowerForm">
                 <div class="add-grower">
@@ -130,15 +132,22 @@ getToken();
         </nav>
     </main>
     <template id="growerTemplate">
-        <div class="title-cntnr">
-            <div class="title">
-                <h3 class="title-txt" data-content="text"></h3>
-            </div>
-            <button class="product-btn">
-                <div class="add-product">
-                    <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
+        <div class="display">
+            <div class="title-cntnr">
+                <div class="title">
+                    <h3 class="title-txt" data-content="business"></h3>
                 </div>
-            </button>
+                <button class="product-btn">
+                    <div class="add-product">
+                        <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
+                    </div>
+                </button>
+            </div>
+            <div class="list-cntnr">
+                <ul class="list-content">
+                    
+                </ul>
+            </div>
         </div>
     </template>
     <script src="assets/js/functions.js"></script>
