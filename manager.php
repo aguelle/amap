@@ -17,6 +17,7 @@ $_SESSION['id_person'] = 139;
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/manager.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>CreAmap</title>
 </head>
 
@@ -36,13 +37,14 @@ $_SESSION['id_person'] = 139;
             <img src="assets/img/creamap_2_-removebg-preview.png" alt="CreAmap second logo" class="scnd-logo">
             <h2 class="welcome-txt">Bienvenue <?= $name ?></h2>
         </div>
+    </header>
+    <main class="manager-main">
         <div id="notif-producer" class="notif">
             <?php
             displayNotif();
             ?>
         </div>
-    </header>
-    <main class="manager-main">
+  
         <section class="growers-cntnr" id="growers">
             <?php
             $query = $dbCo->prepare('SELECT id_amap_user FROM amap_user WHERE id_person = :id;');
@@ -57,27 +59,37 @@ $_SESSION['id_person'] = 139;
             ]);
             $growers = $displayGrowers->fetchAll();
 
-            foreach ($growers as $grower) {
-            ?>
-                <div class="display">
-                    <div class="title-cntnr">
-                        <div class="title">
-                            <h3 class="title-txt"><?= $grower['producer_name'] ?></h3>
-                        </div>
-                        <button class="product-btn">
+        foreach ($growers as $grower) {
+        ?>
+            <div class="display">
+                <div class="title-cntnr">
+                    <div class="title">
+                        <h3 class="title-txt"><?= $grower['producer_name'] ?></h3>
+                    </div>
+                    <section>
+                        <button class="product-btn" id="displayProductForm" data-id-grower="<?=$grower['id_producer']?>">
                             <div class="add-product">
                                 <img src="assets/img/plus-solid.svg" alt="plus solid icon" class="add-icon">
                             </div>
                         </button>
-                    </div>
-                    <div class="list-cntnr">
-                        <ul class="list-content">
-                            <?php
-                            $displayProducts = $dbCo->prepare('SELECT id_product, product_name, SUM(quantity) AS ttl_qty FROM product JOIN commitment USING (id_product) JOIN subscribe USING (id_commitment) WHERE id_producer = :id GROUP BY id_commitment;');
-                            $displayProducts->execute([
-                                'id' => $grower['id_producer']
-                            ]);
-                            $products = $displayProducts->fetchAll();
+                      
+                    </section>
+                </div>
+                <div class="list-cntnr">
+                    <ul class="list-content" >
+                        <form action="" class="add-form-product hidden" data-id-grower="<?=$grower['id_producer']?>" id="productForm">
+                            <div class="inputs-cntnr">
+                                <input class="input-product" type="text" id="product-name" name="product-name" placeholder="Nom du produit">
+                                <input type="hidden" id="token" name="token" value="<?= $_SESSION['token'] ?>">
+                            </div>
+                            <input type="submit" id="addProduct" value="Ajouter produit" class="input-product-valid">
+                        </form>
+                        <?php
+                        $displayProducts = $dbCo->prepare('SELECT id_product, product_name, SUM(quantity) AS ttl_qty FROM product JOIN commitment USING (id_product) JOIN subscribe USING (id_commitment) WHERE id_producer = :id GROUP BY id_commitment;');
+                        $displayProducts->execute([
+                            'id' => $grower['id_producer']
+                        ]);
+                        $products = $displayProducts->fetchAll();
 
                             foreach ($products as $product) {
                             ?>

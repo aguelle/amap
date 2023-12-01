@@ -149,7 +149,7 @@ foreach ($result as $product) {
     </main>
         <nav >
             <a href="">
-                <div class="profile-page">
+                <div class="profile-page active">
                     <img src="assets/img/user-tie-solid.svg" alt="user solid icon" class="nav-icon">
                     <p class="profile-name">Producteur</p>
                 </div>
