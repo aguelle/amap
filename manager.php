@@ -5,7 +5,7 @@ include_once 'includes/_functions.php';
 
 session_start();
 getToken();
-$_SESSION['id_person'] = 8;
+// $_SESSION['id_person'] = 8;
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +15,7 @@ $_SESSION['id_person'] = 8;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/manager.css">
     <title>CreAmap</title>
 </head>
@@ -34,6 +35,11 @@ $_SESSION['id_person'] = 8;
             <h1 class="hidden">CreAmap</h1>
             <img src="assets/img/creamap_2_-removebg-preview.png" alt="CreAmap second logo" class="scnd-logo">
             <h2 class="welcome-txt">Bienvenue <?= $name ?></h2>
+        </div>
+        <div id="notif-producer" class="notif">
+            <?php
+            displayNotif();
+            ?>
         </div>
     </header>
     <main class="manager-main">
