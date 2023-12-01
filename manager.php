@@ -5,7 +5,7 @@ include_once 'includes/_functions.php';
 
 session_start();
 getToken();
-$_SESSION['id_person'] = 2;
+$_SESSION['id_person'] = 139;
 ?>
 
 <!DOCTYPE html>
@@ -140,7 +140,7 @@ $_SESSION['id_person'] = 2;
             </div>
             <div class="list-cntnr">
                 <ul class="list-content">
-                    
+
                 </ul>
             </div>
         </div>

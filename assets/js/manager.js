@@ -50,7 +50,7 @@ deleteBtns.forEach(btn => {
         fetchApi('POST', data)
             .then(data => {
                 console.log(data);
-                // document.querySelector(`[data-id-product="${id}"]`).remove();
+                document.querySelector(`[data-id-product="${id}"]`).remove();
             })
             .catch(error => {
                 console.error('Error: ', error);
