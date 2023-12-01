@@ -69,8 +69,7 @@ if (!isset($_SESSION['id_person'])) {
             </section>
             <section>
                 <h2 class="bg-green member_title">A livrer</h2>
-               <ul class="">
-               <?php
+                <?php
                     $query = $dbCo->prepare("SELECT product_name, address, producer_name, quantity
                 FROM product
                 JOIN commitment USING (id_product)
@@ -81,16 +80,17 @@ if (!isset($_SESSION['id_person'])) {
                 WHERE id_producer = :user AND distribution_start > CURDATE() and payment = 1
                 GROUP BY id_distribution");
 
-                    $query->execute([
-                        'user' => intval($id)
-                    ]);
-                    $result = $query->fetchall();
+$query->execute([
+    'user' => intval($id)
+]);
+$result = $query->fetchall();
 
-                    foreach ($result as $product) {
-                    ?>
-                   <li class="quarter-ttl">Au <?= $product['address'] ?></li>
+foreach ($result as $product) {
+    ?>
+                   <h3 class="quarter-ttl ">Au <?= $product['address'] ?></h3>
+                   <ul class="display">
                    <?php
-                    $query = $dbCo->prepare("SELECT product_name, address, producer_name, quantity
+                    $query = $dbCo->prepare("SELECT product_name, address, producer_name, SUM(quantity) AS totalqty
                 FROM product
                 JOIN commitment USING (id_product)
                 JOIN subscribe USING (id_commitment)
@@ -109,15 +109,15 @@ if (!isset($_SESSION['id_person'])) {
                     ?>
 
                     
-                        <li class="product "><?= $product['quantity'] ?> <?= $product['product_name'] ?></li>
+                        <li class="product flex"><?= $product['totalqty'] ?> <?= $product['product_name'] ?></li>
 
-                    <?php
-                    }
-                    ?>
-                    <?php
+                        <?php
                     }
                     ?>
                 </ul>
+                    <?php
+                    }
+                    ?>
 
             </section>
         </div>
