@@ -137,12 +137,18 @@ else if (isset($data['action']) && $data['action'] === 'connexion' && isset($dat
                     'id_person' => $result[0]['id_person']
                 ]);
                 $producers = $query->fetch();
+                $query = $dbCo->prepare("SELECT id_amap_user FROM manage JOIN amap_user USING (id_amap_user) WHERE id_person = :id_person;");
+                $query->execute([
+                    'id_person' => $result[0]['id_person']
+                ]);
+                $managers = $query->fetch();
                 $_SESSION['id_person'] = $result[0]['id_person'];
                 $_SESSION['notif'] = 'Vous êtes connecté(e).';
                 echo json_encode([
                     'result' => true,
                     'notif' => 'Connexion ok.',
-                    'producer' => !empty($producers)
+                    'producer' => !empty($producers),
+                    'manager' => !empty($managers)
                 ]);
             }
         } else {
