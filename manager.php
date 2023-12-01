@@ -5,7 +5,7 @@ include_once 'includes/_functions.php';
 
 session_start();
 getToken();
-$_SESSION['id_person'] = 2;
+
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +35,11 @@ $_SESSION['id_person'] = 2;
             <h1 class="hidden">CreAmap</h1>
             <img src="assets/img/creamap_2_-removebg-preview.png" alt="CreAmap second logo" class="scnd-logo">
             <h2 class="welcome-txt">Bienvenue <?= $name ?></h2>
+        </div>
+        <div id="notif-producer" class="notif">
+            <?php
+            displayNotif();
+            ?>
         </div>
     </header>
     <main class="manager-main">
