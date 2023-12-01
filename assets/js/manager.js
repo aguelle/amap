@@ -20,16 +20,6 @@ document
       business: document.getElementById("business").value,
     };
     console.log(data);
-    fetchApi("POST", data)
-      .then((data) => {
-        console.log(data);
-        location.reload();
-        growerForm.classList.add("hidden");
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
-  });
 
 //add product
 const productAdd = document.querySelectorAll("#displayProductForm");
@@ -49,6 +39,24 @@ productAdd.forEach(btn => {
     }
   });
 });
+
+    fetchApi('POST', data)
+        .then(data => {
+            console.log(data);
+            // location.reload();
+            if (!data.result) {
+                return;
+            }
+            const growerElement = document.importNode(document.getElementById('growerTemplate').content, true);
+            growerElement.querySelector('[data-content="business"]').innerText = data.business;
+            document.getElementById('growers').prepend(growerElement);
+
+            growerForm.classList.add('hidden');
+        })
+        .catch(error => {
+            console.error('Error: ', error);
+        })
+})
 
 document.getElementById("displayProductForm").addEventListener("click", function (event) {
     event.preventDefault();
@@ -86,13 +94,14 @@ deleteBtns.forEach((btn) => {
       id: id,
     };
     console.log(data);
-    fetchApi("POST", data)
-      .then((data) => {
-        console.log(data);
-        // document.querySelector(`[data-id-product="${id}"]`).remove();
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
-  });
-});
+        fetchApi('POST', data)
+            .then(data => {
+                console.log(data);
+                document.querySelector(`[data-id-product="${id}"]`).remove();
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            })
+    })
+})
+

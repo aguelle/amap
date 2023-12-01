@@ -68,10 +68,15 @@ a,
     margin-top: 38px;
 }
 
-.display {
+.growers-cntnr {
     display: flex;
     flex-wrap: wrap;
-    gap: 19px;
+    gap: 34px;
+    width: 100%;
+}
+
+.display {
+    width: 100%;
 }
 
 .title-cntnr {
