@@ -20,6 +20,8 @@ $_SESSION['id_person'] = 8;
 </head>
 
 <body class="manager-body">
+<a class="index__link bg-pink" href="action.php?action=deconnexion">Déconnexion</a>
+            <a id="pwd-modify__link" class="pwd-modify__link bg-pink" href="">Modifier le mot de passe</a>
     <header class="manager-header">
         <?php
         $displayName = $dbCo->prepare('SELECT firstname FROM person WHERE id_person = :id;');

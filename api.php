@@ -73,8 +73,7 @@ if (isset($data['action']) && $data['action'] === 'inscription' && isset($data['
             $_SESSION['notif'] = 'Votre compte a bien été créé.';
             echo json_encode([
                 'result' => true,
-                'notif' => 'Creation done',
-                'idPerson' => $dbCo->lastInsertId()
+                'notif' => 'Creation done'
             ]);
             $_SESSION['id_person'] = $dbCo->lastInsertId();
         } else {
@@ -133,12 +132,17 @@ else if (isset($data['action']) && $data['action'] === 'connexion' && isset($dat
                 exit;
             }           
             else {
+                $query = $dbCo->prepare("SELECT id_person FROM producer WHERE id_person = :id_person;");
+                $query->execute([
+                    'id_person' => $result[0]['id_person']
+                ]);
+                $producers = $query->fetch();
                 $_SESSION['id_person'] = $result[0]['id_person'];
                 $_SESSION['notif'] = 'Vous êtes connecté(e).';
                 echo json_encode([
                     'result' => true,
                     'notif' => 'Connexion ok.',
-                    'idPerson' => $dbCo->lastInsertId()
+                    'producer' => !empty($producers)
                 ]);
             }
         } else {

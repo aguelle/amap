@@ -374,7 +374,6 @@ a, .add-submit {
     font-weight: 700;
 }
 
-
 .manager-nav {
     position: fixed;
     left: 0;
@@ -417,7 +416,6 @@ a, .add-submit {
 .active>.profile-name {
     color: #ffffff;
 }
-
 
 .notif {
     text-align: center;
